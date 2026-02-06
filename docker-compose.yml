@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        ARG_VITE_BACKEND_URL: ${VITE_BACKEND_URL:-http://localhost:8080}
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
