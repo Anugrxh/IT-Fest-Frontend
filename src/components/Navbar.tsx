@@ -101,20 +101,20 @@ const Navbar = () => {
                     opacity: 0.6,
                 }} />
                 <div
-                    className="flex items-center justify-between px-6 sm:px-10 h-[80px]"
+                    className="flex items-center justify-between px-4 sm:px-6 md:px-10 h-[60px] sm:h-[80px] overflow-hidden"
                     style={{ background: "transparent" }}
                 >
                     <a href="#" className="flex items-center gap-3 group">
                         <img
                             src="/assets/logo/logo.png"
                             alt="Zeitgeist Logo"
-                            className={`h-12 w-12 object-contain ${introSpin ? "logo-spin" : "logo-hover"}`}
+                            className={`h-8 w-8 sm:h-12 sm:w-12 object-contain ${introSpin ? "logo-spin" : "logo-hover"}`}
                             style={{ filter: "brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(6000%) hue-rotate(0deg) brightness(100%)" }}
                         />
                         <span className="nav-title-glare" style={{
-                            fontSize: "1.15rem",
+                            fontSize: "clamp(0.8rem, 2.5vw, 1.15rem)",
                             fontWeight: 700,
-                            letterSpacing: "0.2em",
+                            letterSpacing: "clamp(0.1em, 1vw, 0.2em)",
                         }}>
                             ZEITGEIST
                         </span>
@@ -127,8 +127,8 @@ const Navbar = () => {
                             onClick={() => setMenuOpen(!menuOpen)}
                             aria-label="Toggle menu"
                             style={{
-                                width: "52px",
-                                height: "52px",
+                                width: "clamp(38px, 8vw, 52px)",
+                                height: "clamp(38px, 8vw, 52px)",
                                 borderRadius: "50%",
                                 border: menuOpen ? "1.5px solid rgba(220, 50, 50, 0.5)" : "1.5px solid rgba(255, 215, 0, 0.35)",
                                 background: "transparent",

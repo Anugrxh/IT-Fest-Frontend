@@ -43,8 +43,8 @@ const Hero = () => {
         .hero-title {
           font-family: 'Orbitron', sans-serif;
           font-weight: 900;
-          font-size: clamp(3rem, 10vw, 8rem);
-          letter-spacing: 0.15em;
+          font-size: clamp(2rem, 8vw, 8rem);
+          letter-spacing: clamp(0.05em, 1.5vw, 0.15em);
           color: transparent;
           -webkit-text-stroke: 2px rgba(0, 255, 140, 0.8);
           text-shadow:
@@ -52,6 +52,8 @@ const Hero = () => {
             0 0 60px rgba(0, 255, 140, 0.1);
           transition: all 0.4s ease;
           cursor: default;
+          max-width: 100%;
+          text-align: center;
         }
         .hero-title:hover {
           -webkit-text-stroke: 2px rgba(0, 255, 140, 1);
@@ -96,10 +98,12 @@ const Hero = () => {
         .hero-subtitle {
           font-family: 'Orbitron', sans-serif;
           font-weight: 400;
-          letter-spacing: 0.5em;
+          letter-spacing: clamp(0.15em, 1.5vw, 0.5em);
           color: rgba(0, 255, 140, 0.5);
-          font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+          font-size: clamp(0.45rem, 1.2vw, 0.9rem);
           transition: color 0.3s ease;
+          text-align: center;
+          word-break: break-word;
         }
 
         @keyframes countPulse {
@@ -109,7 +113,7 @@ const Hero = () => {
         .count-digit {
           font-family: 'Orbitron', sans-serif;
           font-weight: 700;
-          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-size: clamp(1.2rem, 4vw, 3.5rem);
           color: #00ff8c;
           text-shadow: 0 0 20px rgba(0, 255, 140, 0.4);
           line-height: 1;
@@ -151,7 +155,7 @@ const Hero = () => {
           background: "radial-gradient(ellipse at 50% 50%, rgba(0, 255, 140, 0.04) 0%, transparent 70%)",
         }} />
 
-        <div className="relative z-10 flex flex-col items-center gap-8 px-4">
+        <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 px-4 w-full max-w-screen-xl">
           <div className="flex items-center gap-3 mb-2">
             <span className="hero-diamond" />
             <span className="hero-subtitle">SYSTEM: ONLINE // NATIONAL_LEVEL_FEST</span>
@@ -172,18 +176,18 @@ const Hero = () => {
 
           <div className="hero-line mb-2" />
 
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
             {units.map((unit, i) => (
-              <div key={unit.label} className="flex items-center gap-4 sm:gap-6">
-                <div className="flex flex-col items-center gap-2">
+              <div key={unit.label} className="flex items-center gap-2 sm:gap-4 md:gap-6">
+                <div className="flex flex-col items-center gap-1 sm:gap-2">
                   <div
                     className="flex items-center justify-center rounded-xl"
                     style={{
                       background: "linear-gradient(145deg, rgba(0, 255, 140, 0.06), rgba(0, 255, 140, 0.01))",
                       border: "1px solid rgba(0, 255, 140, 0.1)",
                       boxShadow: "0 4px 20px rgba(0, 255, 140, 0.05), inset 0 1px 0 rgba(0, 255, 140, 0.08)",
-                      width: "clamp(60px, 16vw, 100px)",
-                      height: "clamp(70px, 18vw, 110px)",
+                      width: "clamp(50px, 14vw, 100px)",
+                      height: "clamp(55px, 16vw, 110px)",
                     }}
                   >
                     <span className="count-digit">
