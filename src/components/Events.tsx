@@ -1,6 +1,21 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import programData from "../assets/program.json";
 
 type Category = "All" | "Games" | "Coding" | "Designing" | "Others";
+
+interface ProgramItem {
+  id: number;
+  name: string;
+  category: Category;
+  description: string;
+  prize_pool: number;
+  price: number;
+  is_team: boolean;
+  team_size: number | null;
+  main_image_url: string;
+  gallery_images: string[];
+}
 
 interface EventItem {
   id: string;
@@ -9,51 +24,6 @@ interface EventItem {
   code: string;
   image: string;
 }
-
-const EVENTS: EventItem[] = [
-  {
-    id: "1",
-    title: "ASCENSION CUP (VALORANT)",
-    category: "Games",
-    code: "GAM-01",
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-  },
-  {
-    id: "2",
-    title: "CODE CLASH",
-    category: "Coding",
-    code: "COD-01",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
-  },
-  {
-    id: "3",
-    title: "PIXEL FORGE",
-    category: "Designing",
-    code: "DES-01",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-  },
-  {
-    id: "4",
-    title: "BGMI SHOWDOWN",
-    category: "Games",
-    code: "GAM-02",
-    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
-  },
-  {
-    id: "5",
-    title: "WEB SIEGE",
-    category: "Coding",
-    code: "COD-02",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
-  },
-  {
-    id: "6",
-    title: "TECH QUIZ",
-    category: "Others",
-    code: "OTH-01",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
-  },
-];
 
 const CATEGORIES: Category[] = ["All", "Games", "Coding", "Designing", "Others"];
 
@@ -73,9 +43,36 @@ const CategoryIcon = ({ category }: { category: Exclude<Category, "All"> }) => {
 
 const Events = () => {
   const [active, setActive] = useState<Category>("All");
+  const [showAll, setShowAll] = useState(false);
+
+  const events: EventItem[] = useMemo(() => {
+    const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80";
+    const categoryCodes: Record<Exclude<Category, "All">, string> = {
+      Games: "GAM",
+      Coding: "COD",
+      Designing: "DES",
+      Others: "OTH",
+    };
+
+    return (programData as ProgramItem[]).map((item) => {
+      const categoryCode = categoryCodes[item.category];
+      const code = `${categoryCode}-${String(item.id).padStart(2, "0")}`;
+
+      return {
+        id: String(item.id),
+        title: item.name,
+        category: item.category,
+        code,
+        image: item.main_image_url || DEFAULT_IMAGE,
+      };
+    });
+  }, []);
 
   const filtered =
-    active === "All" ? EVENTS : EVENTS.filter((e) => e.category === active);
+    active === "All" ? events : events.filter((e) => e.category === active);
+
+  const visibleEvents =
+    active === "All" && !showAll ? filtered.slice(0, 5) : filtered;
 
   return (
     <>
@@ -167,11 +164,14 @@ const Events = () => {
 
         .event-card {
           position: relative;
+          display: block;
           border-radius: 4px;
           overflow: hidden;
           aspect-ratio: 4 / 5;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          text-decoration: none;
+          color: inherit;
         }
         .event-card:hover {
           transform: translateY(-4px);
@@ -286,6 +286,27 @@ const Events = () => {
         .event-explore:hover {
           color: #00ff8c;
         }
+
+        .show-more-btn {
+          font-family: 'Orbitron', sans-serif;
+          font-weight: 600;
+          font-size: 0.75rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.85em 2.2em;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 255, 140, 0.7);
+          background: rgba(0, 255, 140, 0.15);
+          color: #00ff8c;
+          box-shadow: 0 0 18px rgba(0, 255, 140, 0.2);
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .show-more-btn:hover {
+          transform: translateY(-2px);
+          background: rgba(0, 255, 140, 0.25);
+          box-shadow: 0 0 24px rgba(0, 255, 140, 0.35);
+        }
       `}</style>
 
       <section className="events-section py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
@@ -298,7 +319,10 @@ const Events = () => {
                 <button
                   key={cat}
                   className={`cat-btn ${active === cat ? "active" : ""}`}
-                  onClick={() => setActive(cat)}
+                  onClick={() => {
+                    setActive(cat);
+                    setShowAll(false);
+                  }}
                 >
                   {cat === "All" ? "✦ " : ""}
                   {cat}
@@ -308,8 +332,8 @@ const Events = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filtered.map((event) => (
-              <div key={event.id} className="event-card">
+            {visibleEvents.map((event) => (
+              <Link key={event.id} to={`/events/${event.id}`} className="event-card" aria-label={`View ${event.title} details`}>
                 <img
                   src={event.image}
                   alt={event.title}
@@ -332,9 +356,17 @@ const Events = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
+
+          {active === "All" && !showAll && filtered.length > 5 && (
+            <div className="flex justify-center mt-10">
+              <button className="show-more-btn" onClick={() => setShowAll(true)}>
+                Show More
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </>

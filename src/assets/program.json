@@ -1,0 +1,296 @@
+[
+  {
+    "id": 1,
+    "name": "Hackathon",
+    "category": "Coding",
+    "description": "Collaborative coding marathon to build innovative solutions.",
+    "prize_pool": 30000,
+    "price": 300,
+    "is_team": true,
+    "team_size": 4,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 8
+  },
+  {
+    "id": 2,
+    "name": "Treasure Hunt",
+    "category": "Others",
+    "description": "Solve clues and puzzles to find hidden treasures.",
+    "prize_pool": 15000,
+    "price": 300,
+    "is_team": true,
+    "team_size": 4,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 9
+  },
+  {
+    "id": 3,
+    "name": "Blind Coding",
+    "category": "Coding",
+    "description": "Code without seeing the screen, testing logic and memory.",
+    "prize_pool": 5000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 6
+  },
+  {
+    "id": 4,
+    "name": "Trouble Shooting",
+    "category": "Coding",
+    "description": "Identify and fix technical issues under time pressure.",
+    "prize_pool": 5000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 7
+  },
+  {
+    "id": 5,
+    "name": "Typing",
+    "category": "Coding",
+    "description": "Speed typing competition to test accuracy and pace.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 5
+  },
+  {
+    "id": 6,
+    "name": "IT Quiz",
+    "category": "Others",
+    "description": "Quiz competition on IT knowledge and current trends.",
+    "prize_pool": 6000,
+    "price": 300,
+    "is_team": true,
+    "team_size": 2,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 10
+  },
+  {
+    "id": 7,
+    "name": "Logo Designing",
+    "category": "Designing",
+    "description": "Creative contest to design impactful logos.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 4
+  },
+  {
+    "id": 8,
+    "name": "Mehandhi",
+    "category": "Designing",
+    "description": "Traditional art competition showcasing creative Mehandhi designs.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 3
+  },
+  {
+    "id": 9,
+    "name": "PUBG",
+    "category": "Games",
+    "description": "Battle royale gaming competition.",
+    "prize_pool": 6000,
+    "price": 300,
+    "is_team": true,
+    "team_size": 4,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 11
+  },
+  {
+    "id": 10,
+    "name": "E-Football",
+    "category": "Games",
+    "description": "Virtual football gaming challenge.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 8
+  },
+  {
+    "id": 11,
+    "name": "Chess",
+    "category": "Games",
+    "description": "Classic strategy board game competition.",
+    "prize_pool": 7000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 7
+  },
+  {
+    "id": 12,
+    "name": "Photography",
+    "category": "Games",
+    "description": "Capture creative and impactful photographs.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 6
+  },
+  {
+    "id": 13,
+    "name": "Videography",
+    "category": "Games",
+    "description": "Create engaging video content showcasing creativity.",
+    "prize_pool": 3000,
+    "price": 300,
+    "is_team": false,
+    "team_size": null,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 5
+  },
+  {
+    "id": 14,
+    "name": "Debate",
+    "category": "Games",
+    "description": "Competitive debate on contemporary topics.",
+    "prize_pool": 4000,
+    "price": 300,
+    "is_team": true,
+    "team_size": 2,
+    "main_image_url": "",
+    "gallery_images": [],
+    "event_directives": [
+      "Participation format: {team}.",
+      "Use only original submissions and assets.",
+      "Check-in closes 30 minutes before start time.",
+      "Teams must confirm slots after fee payment.",
+      "Contact the desk for clarifications on rules."
+    ],
+    "capacity_total": 12,
+    "capacity_filled": 9
+  }
+]
