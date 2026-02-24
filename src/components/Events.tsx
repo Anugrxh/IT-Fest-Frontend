@@ -7,7 +7,7 @@ type Category = "All" | "Games" | "Coding" | "Designing" | "Others";
 interface ProgramItem {
   id: number;
   name: string;
-  category: Category;
+  category: Exclude<Category, "All">;
   description: string;
   prize_pool: number;
   price: number;

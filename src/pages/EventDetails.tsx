@@ -9,6 +9,9 @@ interface ProgramItem {
   name: string;
   category: Category;
   description: string;
+  event_date?: string;
+  event_time?: string;
+  venue?: string;
   prize_pool: number;
   price: number;
   is_team: boolean;
@@ -65,6 +68,10 @@ const EventDetails = () => {
     ? `${capacityFilled} / ${capacityTotal} Filled`
     : "Capacity TBA";
 
+  const eventDate = event.event_date ?? "Date TBA";
+  const eventTime = event.event_time ?? "Time TBA";
+  const eventVenue = event.venue ?? "Venue TBA";
+
   return (
     <>
       <style>{`
@@ -104,6 +111,26 @@ const EventDetails = () => {
           gap: 0.9rem 1.8rem;
           color: rgba(255, 255, 255, 0.75);
           font-size: 0.85rem;
+        }
+
+        .info-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.85rem 1.5rem;
+          color: rgba(255, 255, 255, 0.75);
+          font-size: 0.85rem;
+        }
+
+        .info-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .info-icon {
+          width: 16px;
+          height: 16px;
+          color: rgba(230, 185, 80, 0.9);
         }
 
         .panel {
@@ -222,6 +249,9 @@ const EventDetails = () => {
           letter-spacing: 0.25em;
           text-transform: uppercase;
           color: #00ff8c;
+          display: inline-flex;
+          align-items: center;
+          margin-bottom: 0.75rem;
         }
 
         .steps-list {
@@ -253,19 +283,36 @@ const EventDetails = () => {
         <div className="max-w-screen-xl mx-auto">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
-              <span className="hero-tag">// technical dossier</span>
-              <div className="flex flex-wrap items-start justify-between gap-6">
-                <div className="max-w-3xl">
-                  <h1 className="hero-title">{event.name}</h1>
-                  <div className="meta-row mt-4">
-                    <span>Category: {event.category}</span>
-                    <span>Format: {teamLabel}</span>
-                    <span>Prize Pool: Rs {event.prize_pool}</span>
-                  </div>
-                </div>
+              <div className="max-w-3xl">
                 <Link to="/" className="back-link">
                   Back to events
                 </Link>
+                <h1 className="hero-title">{event.name}</h1>
+                <div className="info-row mt-4">
+                  <span className="info-item">
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    {eventDate}
+                  </span>
+                  <span className="info-item">
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v6l4 2" />
+                    </svg>
+                    {eventTime}
+                  </span>
+                  <span className="info-item">
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    {eventVenue}
+                  </span>
+                </div> 
               </div>
             </div>
 
