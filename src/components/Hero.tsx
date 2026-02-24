@@ -139,7 +139,7 @@ const Hero = () => {
         .hero-line {
           width: 80px;
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(0, 255, 140, 0.5), transparent);
+          background: linear-gradient(90deg, transparent,  rgba(0, 255, 140, 0.5), transparent);
         }
 
         .hero-diamond {
@@ -150,13 +150,13 @@ const Hero = () => {
           display: inline-block;
         }
       `}</style>
-      <section className="relative h-screen flex flex-col items-center justify-center bg-[#0a0a0f] hero-grid-bg overflow-hidden">
+      <section className="relative h-screen flex flex-col items-center justify-center   bg-[#0a0a0f]  hero-grid-bg overflow-hidden">
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse at 50% 50%, rgba(0, 255, 140, 0.04) 0%, transparent 70%)",
         }} />
 
-        <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 px-4 w-full max-w-screen-xl">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 px-4 w-full max-w-screen-xl  ">
+          <div className="flex items-center gap-3 mb-2 ">
             <span className="hero-diamond" />
             <span className="hero-subtitle">SYSTEM: ONLINE // NATIONAL_LEVEL_FEST</span>
             <span className="hero-diamond" />
