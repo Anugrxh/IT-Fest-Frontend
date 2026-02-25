@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import programData from "../assets/program.json";
 
@@ -44,6 +44,13 @@ const CategoryIcon = ({ category }: { category: Exclude<Category, "All"> }) => {
 const Events = () => {
   const [active, setActive] = useState<Category>("All");
   const [showAll, setShowAll] = useState(false);
+  const [initialCount, setInitialCount] = useState(() => (typeof window !== "undefined" && window.innerWidth >= 1024 ? 6 : 5));
+
+  useEffect(() => {
+    const update = () => setInitialCount(window.innerWidth >= 1024 ? 6 : 5);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const events: EventItem[] = useMemo(() => {
     const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80";
@@ -72,7 +79,7 @@ const Events = () => {
     active === "All" ? events : events.filter((e) => e.category === active);
 
   const visibleEvents =
-    active === "All" && !showAll ? filtered.slice(0, 5) : filtered;
+    active === "All" && !showAll ? filtered.slice(0, initialCount) : filtered;
 
   return (
     <>
@@ -360,7 +367,7 @@ const Events = () => {
             ))}
           </div>
 
-          {active === "All" && !showAll && filtered.length > 5 && (
+          {active === "All" && !showAll && filtered.length > initialCount && (
             <div className="flex justify-center mt-10">
               <button className="show-more-btn" onClick={() => setShowAll(true)}>
                 Show More

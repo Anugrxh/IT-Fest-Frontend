@@ -27,6 +27,7 @@ const EventDetails = () => {
   const { id } = useParams();
   const [showForm, setShowForm] = useState(false);
   const [food, setFood] = useState<"veg" | "nonveg">("veg");
+  const [teamMembers, setTeamMembers] = useState<{ food: "veg" | "nonveg" }[]>([]);
 
   const event = useMemo(() => {
     const list = programData as ProgramItem[];
@@ -451,13 +452,13 @@ const EventDetails = () => {
                 <div className="divider" />
                 <button
                   className="cta-btn"
-                  onClick={() => !event.is_team && setShowForm((v) => !v)}
+                  onClick={() => setShowForm((v) => !v)}
                 >
                   {showForm ? "Close Form" : "Registration Open"}
                 </button>
 
                 {!event.is_team && (
-                  <div className={`reg-form ${showForm ? "open" : ""}`}>
+                  <div className={`reg-form ${showForm ? "open" : ""}`} style={event.is_team && showForm ? { maxHeight: "3000px" } : undefined}>
                     <div className="flex flex-col gap-4">
                       <div>
                         <div className="reg-label">Selected Event</div>
@@ -503,6 +504,114 @@ const EventDetails = () => {
                         </div>
                         <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
                       </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }}>
+                        Register and Pay
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {event.is_team && (
+                  <div className={`reg-form ${showForm ? "open" : ""}`} style={showForm ? { maxHeight: "5000px" } : undefined}>
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <div className="reg-label">Selected Event</div>
+                        <input className="reg-input" type="text" value={event.name} readOnly />
+                      </div>
+                      <div>
+                        <div className="reg-label">Team Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter your team name" required />
+                      </div>
+
+                      <div className="divider" />
+                      <div className="reg-label" style={{ color: "#d2a93b", fontSize: "0.7rem", marginBottom: "-0.25rem" }}>Team Lead</div>
+
+                      <div>
+                        <div className="reg-label">Full Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter team lead's full name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Email ID</div>
+                        <input className="reg-input" type="email" placeholder="Enter team lead's email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                      </div>
+                      <div>
+                        <div className="reg-label">Mobile No</div>
+                        <div className="flex">
+                          <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                          <input className="reg-input" type="tel" placeholder="Enter mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="reg-label">College</div>
+                        <input className="reg-input" type="text" placeholder="Enter college name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Food Preference</div>
+                        <div className="flex gap-3">
+                          <button type="button" className={`food-btn ${food === "veg" ? "active" : ""}`} onClick={() => setFood("veg")}>Veg</button>
+                          <button type="button" className={`food-btn ${food === "nonveg" ? "active" : ""}`} onClick={() => setFood("nonveg")}>Non Veg</button>
+                        </div>
+                        <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
+                      </div>
+
+                      {teamMembers.map((member, idx) => (
+                        <div key={idx}>
+                          <div className="divider" />
+                          <div className="flex items-center justify-between" style={{ marginBottom: "0.75rem" }}>
+                            <div className="reg-label" style={{ color: "#d2a93b", fontSize: "0.7rem", marginBottom: 0 }}>Team Member {idx + 1}</div>
+                            <button
+                              type="button"
+                              onClick={() => setTeamMembers((m) => m.filter((_, i) => i !== idx))}
+                              style={{ fontSize: "0.6rem", color: "rgba(255,100,100,0.7)", background: "none", border: "none", cursor: "pointer", fontFamily: "'Orbitron', sans-serif", letterSpacing: "0.15em" }}
+                            >
+                              REMOVE
+                            </button>
+                          </div>
+                          <div className="flex flex-col gap-4">
+                            <div>
+                              <div className="reg-label">Full Name</div>
+                              <input className="reg-input" type="text" placeholder="Enter member's full name" required />
+                            </div>
+                            <div>
+                              <div className="reg-label">Email ID</div>
+                              <input className="reg-input" type="email" placeholder="Enter member's email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                            </div>
+                            <div>
+                              <div className="reg-label">Mobile No</div>
+                              <div className="flex">
+                                <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                                <input className="reg-input" type="tel" placeholder="Enter mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="reg-label">Food Preference</div>
+                              <div className="flex gap-3">
+                                <button type="button" className={`food-btn ${member.food === "veg" ? "active" : ""}`} onClick={() => setTeamMembers((m) => m.map((v, i) => i === idx ? { ...v, food: "veg" } : v))}>Veg</button>
+                                <button type="button" className={`food-btn ${member.food === "nonveg" ? "active" : ""}`} onClick={() => setTeamMembers((m) => m.map((v, i) => i === idx ? { ...v, food: "nonveg" } : v))}>Non Veg</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {teamMembers.length < (event.team_size ?? 1) - 1 && (
+                        <>
+                          <div className="divider" />
+                          <button
+                            type="button"
+                            className="cta-btn"
+                            style={{ background: "rgba(255,255,255,0.05)", border: "1px dashed rgba(255,255,255,0.2)" }}
+                            onClick={() => setTeamMembers((m) => [...m, { food: "veg" }])}
+                          >
+                            + Add Team Member ({teamMembers.length + 1}/{(event.team_size ?? 1) - 1})
+                          </button>
+                        </>
+                      )}
+
+                      <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.05em", textAlign: "center" }}>
+                        Total team size: {teamMembers.length + 1} / {event.team_size} (including lead)
+                      </p>
+
                       <button className="cta-btn" style={{ marginTop: "0.5rem" }}>
                         Register and Pay
                       </button>
