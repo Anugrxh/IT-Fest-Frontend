@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import programData from "../assets/program.json";
 
@@ -25,6 +25,8 @@ interface ProgramItem {
 
 const EventDetails = () => {
   const { id } = useParams();
+  const [showForm, setShowForm] = useState(false);
+  const [food, setFood] = useState<"veg" | "nonveg">("veg");
 
   const event = useMemo(() => {
     const list = programData as ProgramItem[];
@@ -277,6 +279,65 @@ const EventDetails = () => {
           letter-spacing: 0.2em;
           color: rgba(230, 185, 80, 0.8);
         }
+
+        .reg-form {
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+          margin-top: 0;
+        }
+        .reg-form.open {
+          max-height: 800px;
+          opacity: 1;
+          margin-top: 1.25rem;
+        }
+        .reg-input {
+          width: 100%;
+          padding: 0.7rem 0.9rem;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #e8e8e8;
+          font-size: 0.85rem;
+          outline: none;
+          transition: border-color 0.2s ease;
+        }
+        .reg-input:focus {
+          border-color: rgba(0, 175, 90, 0.6);
+        }
+        .reg-input::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+        .reg-input[readonly] {
+          color: rgba(255, 255, 255, 0.5);
+          cursor: default;
+        }
+        .reg-label {
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 0.35rem;
+        }
+        .food-btn {
+          flex: 1;
+          padding: 0.6rem;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.03);
+          color: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .food-btn.active {
+          background: rgba(0, 175, 90, 0.2);
+          border-color: rgba(0, 175, 90, 0.6);
+          color: #00ff8c;
+        }
       `}</style>
 
       <section className="event-details py-16 sm:py-20 px-5 sm:px-8">
@@ -352,11 +413,11 @@ const EventDetails = () => {
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
                     <div>
                       <div className="badge">Grand Pool</div>
-                      <div className="text-lg text-white mt-2">Rs {event.prize_pool}</div>
+                      <div className="text-lg text-white mt-2">₹{event.prize_pool}/-</div>
                     </div>
                     <div>
                       <div className="badge">Registration</div>
-                      <div className="text-lg text-white mt-2">Rs {event.price}</div>
+                      <div className="text-lg text-white mt-2">₹{event.price}/-</div>
                     </div>
                     <div>
                       <div className="badge">Team Size</div>
@@ -370,13 +431,13 @@ const EventDetails = () => {
                   <div className="flex flex-col gap-3 text-sm text-white/70">
                     <div>Category: {event.category}</div>
                     <div>Format: {teamLabel}</div>
-                    <div>Prize Pool: Rs {event.prize_pool}</div>
-                    <div>Registration Fee: Rs {event.price}</div>
+                    <div>Prize Pool: ₹{event.prize_pool}/-</div>
+                    <div>Registration Fee: ₹{event.price}/-</div>
                   </div>
                 </div>
               </div>
 
-              <div className="status-card lg:col-start-1">
+              <div className="status-card lg:col-span-2">
                 <div className="flex items-center justify-between">
                   <span className="status-label">Capacity Status</span>
                   <span className="status-label">{capacityLabel}</span>
@@ -385,10 +446,69 @@ const EventDetails = () => {
                 <div className="flex flex-col items-center gap-3 text-center">
                   <div className="status-emblem">₹</div>
                   <span className="status-label">Tribute Required</span>
-                  <div className="price-value">Rs {event.price}</div>
+                  <div className="price-value">₹{event.price}/-</div>
                 </div>
                 <div className="divider" />
-                <button className="cta-btn">Registration Open</button>
+                <button
+                  className="cta-btn"
+                  onClick={() => !event.is_team && setShowForm((v) => !v)}
+                >
+                  {showForm ? "Close Form" : "Registration Open"}
+                </button>
+
+                {!event.is_team && (
+                  <div className={`reg-form ${showForm ? "open" : ""}`}>
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <div className="reg-label">Selected Event</div>
+                        <input className="reg-input" type="text" value={event.name} readOnly />
+                      </div>
+                      <div>
+                        <div className="reg-label">Full Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter your full name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Email ID</div>
+                        <input className="reg-input" type="email" placeholder="Enter your email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                      </div>
+                      <div>
+                        <div className="reg-label">Mobile No</div>
+                        <div className="flex">
+                          <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                          <input className="reg-input" type="tel" placeholder="Enter your mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="reg-label">College</div>
+                        <input className="reg-input" type="text" placeholder="Enter your college name" required />
+                      </div>
+
+                      <div>
+                        <div className="reg-label">Food Preference</div>
+                        <div className="flex gap-3">
+                          <button
+                            type="button"
+                            className={`food-btn ${food === "veg" ? "active" : ""}`}
+                            onClick={() => setFood("veg")}
+                          >
+                            Veg
+                          </button>
+                          <button
+                            type="button"
+                            className={`food-btn ${food === "nonveg" ? "active" : ""}`}
+                            onClick={() => setFood("nonveg")}
+                          >
+                            Non Veg
+                          </button>
+                        </div>
+                        <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
+                      </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }}>
+                        Register and Pay
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
