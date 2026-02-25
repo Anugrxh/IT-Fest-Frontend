@@ -312,7 +312,7 @@ const EventDetails = () => {
                     </svg>
                     {eventVenue}
                   </span>
-                </div> 
+                </div>
               </div>
             </div>
 
@@ -323,24 +323,6 @@ const EventDetails = () => {
                   <p className="text-sm sm:text-base leading-7 text-white/80">
                     {event.description}
                   </p>
-                </div>
-
-                <div className="panel">
-                  <div className="panel-title">Prize Bounty</div>
-                  <div className="flex flex-wrap gap-6 text-sm text-white/80">
-                    <div>
-                      <div className="badge">Grand Pool</div>
-                      <div className="text-lg text-white mt-2">Rs {event.prize_pool}</div>
-                    </div>
-                    <div>
-                      <div className="badge">Registration</div>
-                      <div className="text-lg text-white mt-2">Rs {event.price}</div>
-                    </div>
-                    <div>
-                      <div className="badge">Team Size</div>
-                      <div className="text-lg text-white mt-2">{teamLabel}</div>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="panel panel-gold">
@@ -364,20 +346,23 @@ const EventDetails = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6">
-                <div className="status-card">
-                  <div className="flex items-center justify-between">
-                    <span className="status-label">Capacity Status</span>
-                    <span className="status-label">{capacityLabel}</span>
+              <div className="flex flex-col gap-6 order-first lg:order-none">
+                <div className="panel">
+                  <div className="panel-title">Prize Bounty</div>
+                  <div className="flex flex-wrap gap-6 text-sm text-white/80">
+                    <div>
+                      <div className="badge">Grand Pool</div>
+                      <div className="text-lg text-white mt-2">Rs {event.prize_pool}</div>
+                    </div>
+                    <div>
+                      <div className="badge">Registration</div>
+                      <div className="text-lg text-white mt-2">Rs {event.price}</div>
+                    </div>
+                    <div>
+                      <div className="badge">Team Size</div>
+                      <div className="text-lg text-white mt-2">{teamLabel}</div>
+                    </div>
                   </div>
-                  <div className="status-bar" />
-                  <div className="flex flex-col items-center gap-3 text-center">
-                    <div className="status-emblem">₹</div>
-                    <span className="status-label">Tribute Required</span>
-                    <div className="price-value">Rs {event.price}</div>
-                  </div>
-                  <div className="divider" />
-                  <button className="cta-btn">Registration Open</button>
                 </div>
 
                 <div className="panel">
@@ -389,6 +374,21 @@ const EventDetails = () => {
                     <div>Registration Fee: Rs {event.price}</div>
                   </div>
                 </div>
+              </div>
+
+              <div className="status-card lg:col-start-1">
+                <div className="flex items-center justify-between">
+                  <span className="status-label">Capacity Status</span>
+                  <span className="status-label">{capacityLabel}</span>
+                </div>
+                <div className="status-bar" />
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <div className="status-emblem">₹</div>
+                  <span className="status-label">Tribute Required</span>
+                  <div className="price-value">Rs {event.price}</div>
+                </div>
+                <div className="divider" />
+                <button className="cta-btn">Registration Open</button>
               </div>
             </div>
           </div>
