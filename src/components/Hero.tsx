@@ -213,6 +213,43 @@ const Hero = () => {
           }}>
             MARCH 11, 12 — 2026
           </p>
+
+          <a
+            href="https://www.google.com/maps/dir/8.544885,76.879755/Kannur+University,+X9M8%2B576,+Morazha+Kannapuram+Rd,+Mangattuparamba,+Kerala+670567/@10.2616861,74.7976075,8z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x3ba43e40629494dd:0x5864a69dc0ee8189!2m2!1d75.3656299!2d11.9829164!3e0?entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(0.5rem, 1.2vw, 0.85rem)",
+              letterSpacing: "0.3em",
+              color: "rgba(0, 255, 140, 0.45)",
+              marginTop: "0.25rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5em",
+              textDecoration: "none",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(0, 255, 140, 0.8)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(0, 255, 140, 0.45)")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            KANNUR UNIVERSITY MANAGATTUPARAMBA CAMPUS
+          </a>
         </div>
       </section>
     </>
