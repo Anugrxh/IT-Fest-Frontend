@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import programData from "../assets/program.json";
+import termsData from "../assets/terms.json";
 
 type Category = "Games" | "Coding" | "Designing" | "Others";
 
@@ -28,6 +29,8 @@ const EventDetails = () => {
   const [showForm, setShowForm] = useState(false);
   const [food, setFood] = useState<"veg" | "nonveg">("veg");
   const [teamMembers, setTeamMembers] = useState<{ food: "veg" | "nonveg" }[]>([]);
+  const [tcOpen, setTcOpen] = useState(false);
+  const [tcAccepted, setTcAccepted] = useState(false);
 
   const event = useMemo(() => {
     const list = programData as ProgramItem[];
@@ -339,7 +342,130 @@ const EventDetails = () => {
           border-color: rgba(0, 175, 90, 0.6);
           color: #00ff8c;
         }
+        .tc-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.75);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          padding: 1.5rem;
+        }
+        .tc-modal {
+          background: #0d0d12;
+          border: 1px solid rgba(230,185,80,0.3);
+          max-width: 560px;
+          width: 100%;
+          max-height: 80vh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .tc-modal-header {
+          padding: 1.25rem 1.5rem;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.7rem;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+          color: #d2a93b;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .tc-modal-body {
+          padding: 1.25rem 1.5rem;
+          overflow-y: auto;
+          flex: 1;
+        }
+        .tc-modal-body ol {
+          counter-reset: tc;
+          display: grid;
+          gap: 0.9rem;
+          padding: 0;
+          margin: 0;
+        }
+        .tc-modal-body ol li {
+          list-style: none;
+          display: grid;
+          grid-template-columns: 1.6rem 1fr;
+          gap: 0.6rem;
+          font-size: 0.83rem;
+          color: rgba(255,255,255,0.7);
+          line-height: 1.6;
+        }
+        .tc-modal-body ol li::before {
+          counter-increment: tc;
+          content: counter(tc) ".";
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.6rem;
+          color: rgba(230,185,80,0.7);
+          padding-top: 0.15rem;
+        }
+        .tc-close-btn {
+          background: none;
+          border: none;
+          color: rgba(255,255,255,0.5);
+          cursor: pointer;
+          font-size: 1.1rem;
+          line-height: 1;
+          padding: 0;
+        }
+        .tc-close-btn:hover {
+          color: #fff;
+        }
+        .tc-checkbox-row {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          margin-top: 0.75rem;
+          font-size: 0.78rem;
+          color: rgba(255,255,255,0.6);
+        }
+        .tc-checkbox-row input[type="checkbox"] {
+          width: 15px;
+          height: 15px;
+          accent-color: #3b82f6;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+        .tc-link {
+          color: #3b82f6;
+          cursor: pointer;
+          text-decoration: underline;
+          background: none;
+          border: none;
+          padding: 0;
+          font-size: inherit;
+          font-family: inherit;
+        }
+        .tc-link:hover {
+          color: #60a5fa;
+        }
+        .cta-btn:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
       `}</style>
+
+      {tcOpen && (
+        <div className="tc-overlay" onClick={() => setTcOpen(false)}>
+          <div className="tc-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="tc-modal-header">
+              Terms &amp; Conditions
+              <button className="tc-close-btn" onClick={() => setTcOpen(false)}>✕</button>
+            </div>
+            <div className="tc-modal-body">
+              <ol>
+                {termsData.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="event-details py-16 sm:py-20 px-5 sm:px-8">
         <div className="max-w-screen-xl mx-auto">
@@ -504,7 +630,19 @@ const EventDetails = () => {
                         </div>
                         <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
                       </div>
-                      <button className="cta-btn" style={{ marginTop: "0.5rem" }}>
+                      <div className="tc-checkbox-row">
+                        <input
+                          type="checkbox"
+                          id="tc-solo"
+                          checked={tcAccepted}
+                          onChange={(e) => setTcAccepted(e.target.checked)}
+                        />
+                        <label htmlFor="tc-solo">
+                          I agree to the{" "}
+                          <button type="button" className="tc-link" onClick={() => setTcOpen(true)}>Terms and Conditions</button>
+                        </label>
+                      </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }} disabled={!tcAccepted}>
                         Register and Pay
                       </button>
                     </div>
@@ -612,7 +750,19 @@ const EventDetails = () => {
                         Total team size: {teamMembers.length + 1} / {event.team_size} (including lead)
                       </p>
 
-                      <button className="cta-btn" style={{ marginTop: "0.5rem" }}>
+                      <div className="tc-checkbox-row">
+                        <input
+                          type="checkbox"
+                          id="tc-team"
+                          checked={tcAccepted}
+                          onChange={(e) => setTcAccepted(e.target.checked)}
+                        />
+                        <label htmlFor="tc-team">
+                          I agree to the{" "}
+                          <button type="button" className="tc-link" onClick={() => setTcOpen(true)}>Terms and Conditions</button>
+                        </label>
+                      </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }} disabled={!tcAccepted}>
                         Register and Pay
                       </button>
                     </div>
