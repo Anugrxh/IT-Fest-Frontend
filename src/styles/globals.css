@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+html {
+    scroll-behavior: smooth;
+}
+
+/* Smooth out common interactions (hover, focus, reveal transitions) */
+a,
+button {
+    transition:
+        color 220ms ease,
+        background-color 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease,
+        opacity 220ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
