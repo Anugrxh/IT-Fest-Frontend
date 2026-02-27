@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import programData from "../assets/program.json";
 
@@ -9,6 +9,9 @@ interface ProgramItem {
   name: string;
   category: Exclude<Category, "All">;
   description: string;
+  event_date: string;
+  event_time: string;
+  venue: string;
   prize_pool: number;
   price: number;
   is_team: boolean;
@@ -21,8 +24,9 @@ interface EventItem {
   id: string;
   title: string;
   category: Category;
-  code: string;
   image: string;
+  venue: string;
+  time: string;
 }
 
 const CATEGORIES: Category[] = ["All", "Games", "Coding", "Designing", "Others"];
@@ -41,29 +45,42 @@ const CategoryIcon = ({ category }: { category: Exclude<Category, "All"> }) => {
   }
 };
 
+const LocationIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const ClockIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" />
+  </svg>
+);
+
 const Events = () => {
   const [active, setActive] = useState<Category>("All");
   const [showAll, setShowAll] = useState(false);
+  const [initialCount, setInitialCount] = useState(() => (typeof window !== "undefined" && window.innerWidth >= 1024 ? 6 : 5));
+
+  useEffect(() => {
+    const update = () => setInitialCount(window.innerWidth >= 1024 ? 6 : 5);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const events: EventItem[] = useMemo(() => {
     const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80";
-    const categoryCodes: Record<Exclude<Category, "All">, string> = {
-      Games: "GAM",
-      Coding: "COD",
-      Designing: "DES",
-      Others: "OTH",
-    };
 
     return (programData as ProgramItem[]).map((item) => {
-      const categoryCode = categoryCodes[item.category];
-      const code = `${categoryCode}-${String(item.id).padStart(2, "0")}`;
-
       return {
         id: String(item.id),
         title: item.name,
         category: item.category,
-        code,
         image: item.main_image_url || DEFAULT_IMAGE,
+        venue: item.venue,
+        time: item.event_time,
       };
     });
   }, []);
@@ -72,7 +89,7 @@ const Events = () => {
     active === "All" ? events : events.filter((e) => e.category === active);
 
   const visibleEvents =
-    active === "All" && !showAll ? filtered.slice(0, 5) : filtered;
+    active === "All" && !showAll ? filtered.slice(0, initialCount) : filtered;
 
   return (
     <>
@@ -212,6 +229,16 @@ const Events = () => {
           object-fit: cover;
           transition: transform 0.5s ease;
         }
+
+        @media (min-width: 1024px) {
+          .event-card-img {
+            filter: grayscale(1) contrast(1.05) brightness(0.95);
+          }
+          .event-card:hover .event-card-img {
+            filter: none;
+          }
+        }
+
         .event-card:hover .event-card-img {
           transform: scale(1.05);
         }
@@ -238,21 +265,78 @@ const Events = () => {
           padding: 1.25rem;
         }
 
+        @media (max-width: 640px) {
+          .cat-btn {
+            padding: 0.45em 1.1em;
+            letter-spacing: 0.16em;
+          }
+
+          .event-card-content {
+            padding: 0.95rem;
+          }
+
+          .event-badge {
+            font-size: 0.7rem;
+            padding: 0.35em 0.75em;
+            letter-spacing: 0.16em;
+          }
+
+          .event-title {
+            font-size: clamp(1.0rem, 4.2vw, 1.35rem);
+            margin-bottom: 0.65rem;
+          }
+
+          .event-meta-item {
+            font-size: 0.66rem;
+            letter-spacing: 0.06em;
+          }
+
+          .event-explore {
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+          }
+        }
+
         .event-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.4em;
           font-family: 'Orbitron', sans-serif;
           font-weight: 400;
-          font-size: 0.7rem;
+          font-size: 0.75rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: rgba(0, 255, 140, 0.7);
-          background: rgba(0, 0, 0, 0.6);
-          border: 1px solid rgba(0, 255, 140, 0.15);
-          padding: 0.35em 0.8em;
+          color: rgba(255, 255, 255, 0.75);
+          background: rgba(0, 0, 0, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          padding: 0.4em 0.9em;
           border-radius: 2px;
           width: fit-content;
+          transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .event-card:hover .event-badge {
+          background: rgba(0, 0, 0, 0.65);
+        }
+
+        .event-card:hover .event-badge[data-category="Coding"] {
+          color: #00ff8c;
+          border-color: rgba(0, 255, 140, 0.35);
+        }
+
+        .event-card:hover .event-badge[data-category="Games"] {
+          color: #FFD700;
+          border-color: rgba(255, 215, 0, 0.35);
+        }
+
+        .event-card:hover .event-badge[data-category="Designing"] {
+          color: #ff4444;
+          border-color: rgba(255, 68, 68, 0.35);
+        }
+
+        .event-card:hover .event-badge[data-category="Others"] {
+          color: #00ff8c;
+          border-color: rgba(0, 255, 140, 0.35);
         }
 
         .event-title {
@@ -271,6 +355,38 @@ const Events = () => {
           font-size: 0.7rem;
           letter-spacing: 0.15em;
           color: rgba(0, 255, 140, 0.4);
+        }
+
+        .event-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .event-meta-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-family: 'Orbitron', sans-serif;
+          font-weight: 400;
+          font-size: 0.7rem;
+          letter-spacing: 0.08em;
+          color: rgba(0, 255, 140, 0.65);
+        }
+
+        .event-card:hover .event-meta {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        @media (hover: none) {
+          .event-meta {
+            opacity: 1;
+            transform: none;
+          }
         }
 
         .event-explore {
@@ -331,7 +447,7 @@ const Events = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
             {visibleEvents.map((event) => (
               <Link key={event.id} to={`/events/${event.id}`} className="event-card" aria-label={`View ${event.title} details`}>
                 <img
@@ -343,7 +459,7 @@ const Events = () => {
                 <div className="event-card-overlay" />
                 <div className="event-card-content">
                   <div>
-                    <span className="event-badge">
+                    <span className="event-badge" data-category={event.category}>
                       <CategoryIcon category={event.category as Exclude<Category, "All">} />
                       {event.category}
                     </span>
@@ -351,7 +467,16 @@ const Events = () => {
                   <div>
                     <h3 className="event-title mb-3">{event.title}</h3>
                     <div className="flex items-center justify-between">
-                      <span className="event-code">// {event.code}</span>
+                      <div className="event-meta" aria-label="Event location and time">
+                        <span className="event-meta-item">
+                          <LocationIcon />
+                          {event.venue}
+                        </span>
+                        <span className="event-meta-item">
+                          <ClockIcon />
+                          {event.time}
+                        </span>
+                      </div>
                       <span className="event-explore">EXPLORE →</span>
                     </div>
                   </div>
@@ -360,7 +485,7 @@ const Events = () => {
             ))}
           </div>
 
-          {active === "All" && !showAll && filtered.length > 5 && (
+          {active === "All" && !showAll && filtered.length > initialCount && (
             <div className="flex justify-center mt-10">
               <button className="show-more-btn" onClick={() => setShowAll(true)}>
                 Show More

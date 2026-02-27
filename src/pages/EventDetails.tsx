@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import programData from "../assets/program.json";
+import termsData from "../assets/terms.json";
 
 type Category = "Games" | "Coding" | "Designing" | "Others";
 
@@ -25,6 +26,11 @@ interface ProgramItem {
 
 const EventDetails = () => {
   const { id } = useParams();
+  const [showForm, setShowForm] = useState(false);
+  const [food, setFood] = useState<"veg" | "nonveg">("veg");
+  const [teamMembers, setTeamMembers] = useState<{ food: "veg" | "nonveg" }[]>([]);
+  const [tcOpen, setTcOpen] = useState(false);
+  const [tcAccepted, setTcAccepted] = useState(false);
 
   const event = useMemo(() => {
     const list = programData as ProgramItem[];
@@ -277,7 +283,189 @@ const EventDetails = () => {
           letter-spacing: 0.2em;
           color: rgba(230, 185, 80, 0.8);
         }
+
+        .reg-form {
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+          margin-top: 0;
+        }
+        .reg-form.open {
+          max-height: 800px;
+          opacity: 1;
+          margin-top: 1.25rem;
+        }
+        .reg-input {
+          width: 100%;
+          padding: 0.7rem 0.9rem;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #e8e8e8;
+          font-size: 0.85rem;
+          outline: none;
+          transition: border-color 0.2s ease;
+        }
+        .reg-input:focus {
+          border-color: rgba(0, 175, 90, 0.6);
+        }
+        .reg-input::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+        .reg-input[readonly] {
+          color: rgba(255, 255, 255, 0.5);
+          cursor: default;
+        }
+        .reg-label {
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 0.35rem;
+        }
+        .food-btn {
+          flex: 1;
+          padding: 0.6rem;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.03);
+          color: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .food-btn.active {
+          background: rgba(0, 175, 90, 0.2);
+          border-color: rgba(0, 175, 90, 0.6);
+          color: #00ff8c;
+        }
+        .tc-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.75);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          padding: 1.5rem;
+        }
+        .tc-modal {
+          background: #0d0d12;
+          border: 1px solid rgba(230,185,80,0.3);
+          max-width: 560px;
+          width: 100%;
+          max-height: 80vh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .tc-modal-header {
+          padding: 1.25rem 1.5rem;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.7rem;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+          color: #d2a93b;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .tc-modal-body {
+          padding: 1.25rem 1.5rem;
+          overflow-y: auto;
+          flex: 1;
+        }
+        .tc-modal-body ol {
+          counter-reset: tc;
+          display: grid;
+          gap: 0.9rem;
+          padding: 0;
+          margin: 0;
+        }
+        .tc-modal-body ol li {
+          list-style: none;
+          display: grid;
+          grid-template-columns: 1.6rem 1fr;
+          gap: 0.6rem;
+          font-size: 0.83rem;
+          color: rgba(255,255,255,0.7);
+          line-height: 1.6;
+        }
+        .tc-modal-body ol li::before {
+          counter-increment: tc;
+          content: counter(tc) ".";
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.6rem;
+          color: rgba(230,185,80,0.7);
+          padding-top: 0.15rem;
+        }
+        .tc-close-btn {
+          background: none;
+          border: none;
+          color: rgba(255,255,255,0.5);
+          cursor: pointer;
+          font-size: 1.1rem;
+          line-height: 1;
+          padding: 0;
+        }
+        .tc-close-btn:hover {
+          color: #fff;
+        }
+        .tc-checkbox-row {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          margin-top: 0.75rem;
+          font-size: 0.78rem;
+          color: rgba(255,255,255,0.6);
+        }
+        .tc-checkbox-row input[type="checkbox"] {
+          width: 15px;
+          height: 15px;
+          accent-color: #3b82f6;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+        .tc-link {
+          color: #3b82f6;
+          cursor: pointer;
+          text-decoration: underline;
+          background: none;
+          border: none;
+          padding: 0;
+          font-size: inherit;
+          font-family: inherit;
+        }
+        .tc-link:hover {
+          color: #60a5fa;
+        }
+        .cta-btn:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
       `}</style>
+
+      {tcOpen && (
+        <div className="tc-overlay" onClick={() => setTcOpen(false)}>
+          <div className="tc-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="tc-modal-header">
+              Terms &amp; Conditions
+              <button className="tc-close-btn" onClick={() => setTcOpen(false)}>✕</button>
+            </div>
+            <div className="tc-modal-body">
+              <ol>
+                {termsData.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="event-details py-16 sm:py-20 px-5 sm:px-8">
         <div className="max-w-screen-xl mx-auto">
@@ -352,11 +540,11 @@ const EventDetails = () => {
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
                     <div>
                       <div className="badge">Grand Pool</div>
-                      <div className="text-lg text-white mt-2">Rs {event.prize_pool}</div>
+                      <div className="text-lg text-white mt-2">₹{event.prize_pool}/-</div>
                     </div>
                     <div>
                       <div className="badge">Registration</div>
-                      <div className="text-lg text-white mt-2">Rs {event.price}</div>
+                      <div className="text-lg text-white mt-2">₹{event.price}/-</div>
                     </div>
                     <div>
                       <div className="badge">Team Size</div>
@@ -370,13 +558,13 @@ const EventDetails = () => {
                   <div className="flex flex-col gap-3 text-sm text-white/70">
                     <div>Category: {event.category}</div>
                     <div>Format: {teamLabel}</div>
-                    <div>Prize Pool: Rs {event.prize_pool}</div>
-                    <div>Registration Fee: Rs {event.price}</div>
+                    <div>Prize Pool: ₹{event.prize_pool}/-</div>
+                    <div>Registration Fee: ₹{event.price}/-</div>
                   </div>
                 </div>
               </div>
 
-              <div className="status-card lg:col-start-1">
+              <div className="status-card lg:col-span-2">
                 <div className="flex items-center justify-between">
                   <span className="status-label">Capacity Status</span>
                   <span className="status-label">{capacityLabel}</span>
@@ -385,10 +573,201 @@ const EventDetails = () => {
                 <div className="flex flex-col items-center gap-3 text-center">
                   <div className="status-emblem">₹</div>
                   <span className="status-label">Tribute Required</span>
-                  <div className="price-value">Rs {event.price}</div>
+                  <div className="price-value">₹{event.price}/-</div>
                 </div>
                 <div className="divider" />
-                <button className="cta-btn">Registration Open</button>
+                <button
+                  className="cta-btn"
+                  onClick={() => setShowForm((v) => !v)}
+                >
+                  {showForm ? "Close Form" : "Registration Open"}
+                </button>
+
+                {!event.is_team && (
+                  <div className={`reg-form ${showForm ? "open" : ""}`} style={event.is_team && showForm ? { maxHeight: "3000px" } : undefined}>
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <div className="reg-label">Selected Event</div>
+                        <input className="reg-input" type="text" value={event.name} readOnly />
+                      </div>
+                      <div>
+                        <div className="reg-label">Full Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter your full name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Email ID</div>
+                        <input className="reg-input" type="email" placeholder="Enter your email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                      </div>
+                      <div>
+                        <div className="reg-label">Mobile No</div>
+                        <div className="flex">
+                          <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                          <input className="reg-input" type="tel" placeholder="Enter your mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="reg-label">College</div>
+                        <input className="reg-input" type="text" placeholder="Enter your college name" required />
+                      </div>
+
+                      <div>
+                        <div className="reg-label">Food Preference</div>
+                        <div className="flex gap-3">
+                          <button
+                            type="button"
+                            className={`food-btn ${food === "veg" ? "active" : ""}`}
+                            onClick={() => setFood("veg")}
+                          >
+                            Veg
+                          </button>
+                          <button
+                            type="button"
+                            className={`food-btn ${food === "nonveg" ? "active" : ""}`}
+                            onClick={() => setFood("nonveg")}
+                          >
+                            Non Veg
+                          </button>
+                        </div>
+                        <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
+                      </div>
+                      <div className="tc-checkbox-row">
+                        <input
+                          type="checkbox"
+                          id="tc-solo"
+                          checked={tcAccepted}
+                          onChange={(e) => setTcAccepted(e.target.checked)}
+                        />
+                        <label htmlFor="tc-solo">
+                          I agree to the{" "}
+                          <button type="button" className="tc-link" onClick={() => setTcOpen(true)}>Terms and Conditions</button>
+                        </label>
+                      </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }} disabled={!tcAccepted}>
+                        Register and Pay
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {event.is_team && (
+                  <div className={`reg-form ${showForm ? "open" : ""}`} style={showForm ? { maxHeight: "5000px" } : undefined}>
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <div className="reg-label">Selected Event</div>
+                        <input className="reg-input" type="text" value={event.name} readOnly />
+                      </div>
+                      <div>
+                        <div className="reg-label">Team Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter your team name" required />
+                      </div>
+
+                      <div className="divider" />
+                      <div className="reg-label" style={{ color: "#d2a93b", fontSize: "0.7rem", marginBottom: "-0.25rem" }}>Team Lead</div>
+
+                      <div>
+                        <div className="reg-label">Full Name</div>
+                        <input className="reg-input" type="text" placeholder="Enter team lead's full name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Email ID</div>
+                        <input className="reg-input" type="email" placeholder="Enter team lead's email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                      </div>
+                      <div>
+                        <div className="reg-label">Mobile No</div>
+                        <div className="flex">
+                          <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                          <input className="reg-input" type="tel" placeholder="Enter mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="reg-label">College</div>
+                        <input className="reg-input" type="text" placeholder="Enter college name" required />
+                      </div>
+                      <div>
+                        <div className="reg-label">Food Preference</div>
+                        <div className="flex gap-3">
+                          <button type="button" className={`food-btn ${food === "veg" ? "active" : ""}`} onClick={() => setFood("veg")}>Veg</button>
+                          <button type="button" className={`food-btn ${food === "nonveg" ? "active" : ""}`} onClick={() => setFood("nonveg")}>Non Veg</button>
+                        </div>
+                        <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.4rem", letterSpacing: "0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
+                      </div>
+
+                      {teamMembers.map((member, idx) => (
+                        <div key={idx}>
+                          <div className="divider" />
+                          <div className="flex items-center justify-between" style={{ marginBottom: "0.75rem" }}>
+                            <div className="reg-label" style={{ color: "#d2a93b", fontSize: "0.7rem", marginBottom: 0 }}>Team Member {idx + 1}</div>
+                            <button
+                              type="button"
+                              onClick={() => setTeamMembers((m) => m.filter((_, i) => i !== idx))}
+                              style={{ fontSize: "0.6rem", color: "rgba(255,100,100,0.7)", background: "none", border: "none", cursor: "pointer", fontFamily: "'Orbitron', sans-serif", letterSpacing: "0.15em" }}
+                            >
+                              REMOVE
+                            </button>
+                          </div>
+                          <div className="flex flex-col gap-4">
+                            <div>
+                              <div className="reg-label">Full Name</div>
+                              <input className="reg-input" type="text" placeholder="Enter member's full name" required />
+                            </div>
+                            <div>
+                              <div className="reg-label">Email ID</div>
+                              <input className="reg-input" type="email" placeholder="Enter member's email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+                            </div>
+                            <div>
+                              <div className="reg-label">Mobile No</div>
+                              <div className="flex">
+                                <span style={{ padding: "0.7rem 0.75rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRight: "none", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>+91</span>
+                                <input className="reg-input" type="tel" placeholder="Enter mobile number" required maxLength={10} pattern="[0-9]{10}" onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").slice(0, 10); }} />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="reg-label">Food Preference</div>
+                              <div className="flex gap-3">
+                                <button type="button" className={`food-btn ${member.food === "veg" ? "active" : ""}`} onClick={() => setTeamMembers((m) => m.map((v, i) => i === idx ? { ...v, food: "veg" } : v))}>Veg</button>
+                                <button type="button" className={`food-btn ${member.food === "nonveg" ? "active" : ""}`} onClick={() => setTeamMembers((m) => m.map((v, i) => i === idx ? { ...v, food: "nonveg" } : v))}>Non Veg</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {teamMembers.length < (event.team_size ?? 1) - 1 && (
+                        <>
+                          <div className="divider" />
+                          <button
+                            type="button"
+                            className="cta-btn"
+                            style={{ background: "rgba(255,255,255,0.05)", border: "1px dashed rgba(255,255,255,0.2)" }}
+                            onClick={() => setTeamMembers((m) => [...m, { food: "veg" }])}
+                          >
+                            + Add Team Member ({teamMembers.length + 1}/{(event.team_size ?? 1) - 1})
+                          </button>
+                        </>
+                      )}
+
+                      <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.05em", textAlign: "center" }}>
+                        Total team size: {teamMembers.length + 1} / {event.team_size} (including lead)
+                      </p>
+
+                      <div className="tc-checkbox-row">
+                        <input
+                          type="checkbox"
+                          id="tc-team"
+                          checked={tcAccepted}
+                          onChange={(e) => setTcAccepted(e.target.checked)}
+                        />
+                        <label htmlFor="tc-team">
+                          I agree to the{" "}
+                          <button type="button" className="tc-link" onClick={() => setTcOpen(true)}>Terms and Conditions</button>
+                        </label>
+                      </div>
+                      <button className="cta-btn" style={{ marginTop: "0.5rem" }} disabled={!tcAccepted}>
+                        Register and Pay
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

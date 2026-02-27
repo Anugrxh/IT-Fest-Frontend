@@ -104,7 +104,7 @@ const Navbar = () => {
                     className="flex items-center justify-between px-4 sm:px-6 md:px-10 h-[60px] sm:h-[80px] overflow-hidden"
                     style={{ background: "transparent" }}
                 >
-                    <a href="#" className="flex items-center gap-3 group">
+                    <a href="/" className="flex items-center gap-3 group">
                         <img
                             src="/assets/logo/logo.png"
                             alt="Zeitgeist Logo"

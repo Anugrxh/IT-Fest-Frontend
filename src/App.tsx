@@ -3,6 +3,11 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Events from "./components/Events";
 import EventDetails from "./pages/EventDetails";
+import Footer from "./components/Footer";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Refund from "./pages/Refund";
+import Faq from "./pages/Faq";
 
 const App = () => {
   return (
@@ -19,7 +24,12 @@ const App = () => {
           }
         />
         <Route path="/events/:id" element={<EventDetails />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/refund" element={<Refund />} />
+        <Route path="/faq" element={<Faq />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
