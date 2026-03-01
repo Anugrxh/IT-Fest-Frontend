@@ -1,9 +1,9 @@
 import about from "../assets/about.json";
 
 const About = () => {
-    return (
-        <section className="about-wrap">
-            <style>{`
+  return (
+    <section id="about" className="about-wrap">
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
         .about-wrap {
@@ -264,60 +264,60 @@ const About = () => {
         .about-right { animation: abFadeUp .7s .15s ease both; }
       `}</style>
 
-            <div className="about-glow" />
-            <div className="about-glow-r" />
+      <div className="about-glow" />
+      <div className="about-glow-r" />
 
-            <div className="about-inner">
-                {/* ── LEFT ── */}
-                <div className="about-left">
-                    <div className="about-kicker">// WHO WE ARE</div>
-                    <div className="about-title">{about.headline}</div>
-                    <div className="about-rule" />
+      <div className="about-inner">
+        {/* ── LEFT ── */}
+        <div className="about-left">
+          <div className="about-kicker">// WHO WE ARE</div>
+          <div className="about-title">{about.headline}</div>
+          <div className="about-rule" />
 
-                    <p className="about-desc">{about.description}</p>
-                    <p className="about-sub">{about.sub_description}</p>
+          <p className="about-desc">{about.description}</p>
+          <p className="about-sub">{about.sub_description}</p>
 
-                    <div className="about-meta">
-                        <span className="meta-badge">{about.date}</span>
-                        <span className="meta-badge">{about.venue}</span>
-                    </div>
+          <div className="about-meta">
+            <span className="meta-badge">{about.date}</span>
+            <span className="meta-badge">{about.venue}</span>
+          </div>
 
-                    <div className="about-highlights">
-                        {about.highlights.map((h) => (
-                            <div key={h.text} className="highlight-row">
-                                <span className="highlight-icon">{h.icon}</span>
-                                <span>{h.text}</span>
-                            </div>
-                        ))}
-                    </div>
+          <div className="about-highlights">
+            {about.highlights.map((h) => (
+              <div key={h.text} className="highlight-row">
+                <span className="highlight-icon">{h.icon}</span>
+                <span>{h.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── RIGHT ── */}
+        <div className="about-right">
+          <div className="stats-panel">
+            <div className="stats-panel-tag">// SYSTEM METRICS</div>
+
+            <div className="stats-grid">
+              {about.stats.map((s) => (
+                <div key={s.label} className="stat-cell">
+                  <span className="stat-value">{s.value}</span>
+                  <span className="stat-label">{s.label}</span>
                 </div>
-
-                {/* ── RIGHT ── */}
-                <div className="about-right">
-                    <div className="stats-panel">
-                        <div className="stats-panel-tag">// SYSTEM METRICS</div>
-
-                        <div className="stats-grid">
-                            {about.stats.map((s) => (
-                                <div key={s.label} className="stat-cell">
-                                    <span className="stat-value">{s.value}</span>
-                                    <span className="stat-label">{s.label}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="edition-banner">
-                            <span className="edition-num">ZEITGEIST {about.edition}</span>
-                            <div className="edition-detail">
-                                <div className="edition-date">{about.date}</div>
-                                <div className="edition-venue">{about.venue}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              ))}
             </div>
-        </section>
-    );
+
+            <div className="edition-banner">
+              <span className="edition-num">ZEITGEIST {about.edition}</span>
+              <div className="edition-detail">
+                <div className="edition-date">{about.date}</div>
+                <div className="edition-venue">{about.venue}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default About;
