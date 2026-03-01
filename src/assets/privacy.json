@@ -1,0 +1,18 @@
+[
+    {
+        "title": "1. Information Collection",
+        "body": "We collect personal information such as Name, Email, Phone Number, and Department solely for the purpose of event registration and verification."
+    },
+    {
+        "title": "2. Use of Information",
+        "body": "Your data is used to generate your entry pass and communicate event updates. We do not sell or share your data with third parties, except as required by law."
+    },
+    {
+        "title": "3. Payment Data",
+        "body": "We do not store your credit card or banking details. All payments are processed securely through Razorpay."
+    },
+    {
+        "title": "4. Data Security",
+        "body": "We implement industry-standard security measures to protect your personal information during transmission and storage."
+    }
+]

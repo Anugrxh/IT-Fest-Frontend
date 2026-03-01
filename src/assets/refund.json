@@ -1,0 +1,22 @@
+[
+    {
+        "title": "1. Cancellations",
+        "type": "paragraph",
+        "body": "Registration for 'Shreshta' events is generally non-cancellable. However, in case of a duplicate payment or technical error, please contact us immediately."
+    },
+    {
+        "title": "2. Refunds",
+        "type": "list",
+        "items": [
+            "Refunds are only processed in cases of cancelled events or technical failures where money was deducted but the ticket was not generated.",
+            "Approved refunds will be processed within 5-7 working days.",
+            "The amount will be credited back to the original source of payment (Credit Card/UPI/Bank Account)."
+        ]
+    },
+    {
+        "title": "3. Contact for Refunds",
+        "type": "paragraph",
+        "body": "If you face any payment issues, please email us at shreshta@mgits.ac.in with your transaction ID.",
+        "contactEmail": "shreshta@mgits.ac.in"
+    }
+]
