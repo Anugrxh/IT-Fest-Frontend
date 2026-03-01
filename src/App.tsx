@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Events from "./components/Events";
+import About from "./components/About";
 import EventDetails from "./pages/EventDetails";
 import Footer from "./components/Footer";
 import Sponsors from "./components/Sponsors";
@@ -20,6 +21,7 @@ const App = () => {
           element={
             <>
               <Hero />
+              <About />
               <Events />
               <Sponsors />
             </>
