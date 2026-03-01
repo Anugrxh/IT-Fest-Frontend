@@ -6,6 +6,7 @@ import About from "./components/About";
 import EventDetails from "./pages/EventDetails";
 import Footer from "./components/Footer";
 import Sponsors from "./components/Sponsors";
+import Schedule from "./components/Schedule";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
@@ -24,6 +25,7 @@ const App = () => {
               <About />
               <Events />
               <Sponsors />
+              <Schedule />
             </>
           }
         />
