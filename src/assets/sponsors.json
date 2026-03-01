@@ -1,0 +1,90 @@
+{
+    "title": [
+        {
+            "name": "Tech Corp",
+            "logo": null,
+            "initials": "TC",
+            "url": null
+        }
+    ],
+    "co": [
+        {
+            "name": "NovaSystems",
+            "logo": null,
+            "initials": "NS",
+            "url": null
+        },
+        {
+            "name": "ByteWave",
+            "logo": null,
+            "initials": "BW",
+            "url": null
+        }
+    ],
+    "event": [
+        {
+            "name": "PixelForge",
+            "logo": null,
+            "initials": "PF",
+            "url": null
+        },
+        {
+            "name": "CloudNine",
+            "logo": null,
+            "initials": "CN",
+            "url": null
+        },
+        {
+            "name": "DevMatrix",
+            "logo": null,
+            "initials": "DM",
+            "url": null
+        }
+    ],
+    "prize": [
+        {
+            "name": "ZeroLag",
+            "logo": null,
+            "initials": "ZL",
+            "url": null
+        },
+        {
+            "name": "IronPeak",
+            "logo": null,
+            "initials": "IP",
+            "url": null
+        },
+        {
+            "name": "DataSynth",
+            "logo": null,
+            "initials": "DS",
+            "url": null
+        }
+    ],
+    "banner": [
+        {
+            "name": "VectorX",
+            "logo": null,
+            "initials": "VX",
+            "url": null
+        },
+        {
+            "name": "AlphaGrid",
+            "logo": null,
+            "initials": "AG",
+            "url": null
+        },
+        {
+            "name": "CoreFusion",
+            "logo": null,
+            "initials": "CF",
+            "url": null
+        },
+        {
+            "name": "NexNode",
+            "logo": null,
+            "initials": "NN",
+            "url": null
+        }
+    ]
+}

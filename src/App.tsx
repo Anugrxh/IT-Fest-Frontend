@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Events from "./components/Events";
 import EventDetails from "./pages/EventDetails";
 import Footer from "./components/Footer";
+import Sponsors from "./components/Sponsors";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
@@ -20,6 +21,7 @@ const App = () => {
             <>
               <Hero />
               <Events />
+              <Sponsors />
             </>
           }
         />
