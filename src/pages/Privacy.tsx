@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import sections from "../assets/privacy.json";
 
 const Privacy = () => {
   return (
@@ -79,37 +80,12 @@ const Privacy = () => {
 
               <div className="policy-panel mt-10 p-6 sm:p-10">
                 <div className="space-y-10 body-text">
-                  <div>
-                    <div className="section-title">1. Information Collection</div>
-                    <p className="mt-3">
-                      We collect personal information such as Name, Email, Phone Number, and Department solely for the
-                      purpose of event registration and verification.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">2. Use of Information</div>
-                    <p className="mt-3">
-                      Your data is used to generate your entry pass and communicate event updates. We do not sell or
-                      share your data with third parties, except as required by law.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">3. Payment Data</div>
-                    <p className="mt-3">
-                      We do not store your credit card or banking details. All payments are processed securely through
-                      Razorpay.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">4. Data Security</div>
-                    <p className="mt-3">
-                      We implement industry-standard security measures to protect your personal information during
-                      transmission and storage.
-                    </p>
-                  </div>
+                  {sections.map((s) => (
+                    <div key={s.title}>
+                      <div className="section-title">{s.title}</div>
+                      <p className="mt-3">{s.body}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

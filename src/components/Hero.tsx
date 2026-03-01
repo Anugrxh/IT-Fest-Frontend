@@ -150,7 +150,7 @@ const Hero = () => {
           display: inline-block;
         }
       `}</style>
-      <section className="relative h-screen flex flex-col items-center justify-center   bg-[#0a0a0f]  hero-grid-bg overflow-hidden">
+      <section id="home" className="relative h-screen flex flex-col items-center justify-center   bg-[#0a0a0f]  hero-grid-bg overflow-hidden">
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse at 50% 50%, rgba(0, 255, 140, 0.04) 0%, transparent 70%)",
         }} />

@@ -1,33 +1,8 @@
 import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import items from "../assets/faq.json";
 
 const Faq = () => {
-  const items = useMemo(
-    () => [
-      {
-        n: "01",
-        q: "WHO CAN ENTER THE REALM?",
-        a: "All students and participants can register for events. Some events may have specific eligibility or team-size requirements—check the event details before registering.",
-      },
-      {
-        n: "02",
-        q: "WHERE IS THE SHRINE LOCATED?",
-        a: "The event is hosted at Kannur University, Mangattuparamba Campus. Exact venue/room allocations will be shared with registered participants.",
-      },
-      {
-        n: "03",
-        q: "HOW DO I REGISTER FOR TRIALS (EVENTS)?",
-        a: "Open the EVENTS section, pick your event, and proceed with registration. After successful payment (if applicable), you will receive confirmation and pass details.",
-      },
-      {
-        n: "04",
-        q: "IS ACCOMMODATION PROVIDED?",
-        a: "If accommodation is available for outstation participants, details and contact information will be announced closer to the event dates.",
-      },
-    ],
-    []
-  );
-
   const [openIndex, setOpenIndex] = useState<number | null>(1);
 
   return (
@@ -223,12 +198,12 @@ const Faq = () => {
                         </button>
                       </div>
 
-                        <div
-                          id={`faq-${item.n}`}
-                          className={`oracle-a ${open ? "open" : ""}`}
-                        >
-                          <div className="oracle-a-inner">{item.a}</div>
-                        </div>
+                      <div
+                        id={`faq-${item.n}`}
+                        className={`oracle-a ${open ? "open" : ""}`}
+                      >
+                        <div className="oracle-a-inner">{item.a}</div>
+                      </div>
                     </div>
                   );
                 })}

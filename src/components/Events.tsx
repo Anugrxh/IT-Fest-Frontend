@@ -425,7 +425,7 @@ const Events = () => {
         }
       `}</style>
 
-      <section className="events-section py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <section id="events" className="events-section py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-screen-xl mx-auto">
           <div className="flex flex-col items-center gap-8 sm:gap-12 mb-12 sm:mb-16">
             <h2 className="events-heading">OUR EVENTS</h2>

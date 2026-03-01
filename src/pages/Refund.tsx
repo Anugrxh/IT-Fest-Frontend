@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import sections from "../assets/refund.json";
 
 const Refund = () => {
   return (
@@ -85,39 +86,32 @@ const Refund = () => {
 
               <div className="policy-panel mt-10 p-6 sm:p-10">
                 <div className="space-y-10 body-text">
-                  <div>
-                    <div className="section-title">1. Cancellations</div>
-                    <p className="mt-3">
-                      Registration for {" '"}Shreshta{" '"} events is generally non-cancellable. However, in case of a
-                      duplicate payment or technical error, please contact us immediately.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">2. Refunds</div>
-                    <ul className="mt-4 list-disc pl-5 space-y-3">
-                      <li>
-                        Refunds are only processed in cases of cancelled events or technical failures where money was
-                        deducted but the ticket was not generated.
-                      </li>
-                      <li>Approved refunds will be processed within 5-7 working days.</li>
-                      <li>
-                        The amount will be credited back to the original source of payment (Credit Card/UPI/Bank
-                        Account).
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="section-title">3. Contact for Refunds</div>
-                    <p className="mt-3">
-                      If you face any payment issues, please email us at{" "}
-                      <a className="mail-link" href="mailto:shreshta@mgits.ac.in">
-                        shreshta@mgits.ac.in
-                      </a>{" "}
-                      with your transaction ID.
-                    </p>
-                  </div>
+                  {sections.map((s) => (
+                    <div key={s.title}>
+                      <div className="section-title">{s.title}</div>
+                      {s.type === "list" && s.items ? (
+                        <ul className="mt-4 list-disc pl-5 space-y-3">
+                          {s.items.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="mt-3">
+                          {s.contactEmail ? (
+                            <>
+                              {s.body?.replace(s.contactEmail, "").replace("  ", " ")}
+                              <a className="mail-link" href={`mailto:${s.contactEmail}`}>
+                                {s.contactEmail}
+                              </a>
+                              {" "}with your transaction ID.
+                            </>
+                          ) : (
+                            s.body
+                          )}
+                        </p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

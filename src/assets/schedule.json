@@ -1,0 +1,118 @@
+[
+    {
+        "day": "March 11",
+        "date": "11.03.2026",
+        "label": "DAY 01",
+        "events": [
+            {
+                "time": "09:00 AM",
+                "title": "Registration & Check-in",
+                "venue": "Main Gate",
+                "category": "General"
+            },
+            {
+                "time": "10:00 AM",
+                "title": "Inauguration Ceremony",
+                "venue": "Main Auditorium",
+                "category": "General"
+            },
+            {
+                "time": "11:00 AM",
+                "title": "Hackathon",
+                "venue": "Main Auditorium",
+                "category": "Coding"
+            },
+            {
+                "time": "11:00 AM",
+                "title": "Logo Designing",
+                "venue": "Design Studio",
+                "category": "Designing"
+            },
+            {
+                "time": "02:00 PM",
+                "title": "Treasure Hunt",
+                "venue": "Campus Courtyard",
+                "category": "Others"
+            },
+            {
+                "time": "02:00 PM",
+                "title": "E-Football",
+                "venue": "eSports Room",
+                "category": "Games"
+            },
+            {
+                "time": "04:00 PM",
+                "title": "Photography",
+                "venue": "Open Grounds",
+                "category": "Games"
+            },
+            {
+                "time": "05:30 PM",
+                "title": "Day 1 Wrap-up",
+                "venue": "Main Auditorium",
+                "category": "General"
+            }
+        ]
+    },
+    {
+        "day": "March 12",
+        "date": "12.03.2026",
+        "label": "DAY 02",
+        "events": [
+            {
+                "time": "09:30 AM",
+                "title": "Blind Coding",
+                "venue": "Lab Block A",
+                "category": "Coding"
+            },
+            {
+                "time": "10:00 AM",
+                "title": "Chess",
+                "venue": "Library Hall",
+                "category": "Games"
+            },
+            {
+                "time": "11:30 AM",
+                "title": "Trouble Shooting",
+                "venue": "Lab Block B",
+                "category": "Coding"
+            },
+            {
+                "time": "12:30 PM",
+                "title": "Mehandhi",
+                "venue": "Art Pavilion",
+                "category": "Designing"
+            },
+            {
+                "time": "02:00 PM",
+                "title": "Typing",
+                "venue": "Computer Center",
+                "category": "Coding"
+            },
+            {
+                "time": "02:30 PM",
+                "title": "PUBG",
+                "venue": "Gaming Arena",
+                "category": "Games"
+            },
+            {
+                "time": "04:00 PM",
+                "title": "IT Quiz",
+                "venue": "Seminar Hall",
+                "category": "Others"
+            },
+            {
+                "time": "04:00 PM",
+                "title": "Debate",
+                "venue": "Conference Room",
+                "category": "Others"
+            },
+            {
+                "time": "05:30 PM",
+                "title": "Prize Distribution & Valediction",
+                "venue": "Main Auditorium",
+                "category": "General"
+            }
+        ]
+    }
+]

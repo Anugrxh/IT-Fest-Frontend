@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import items from "../assets/terms.json";
 
 const Terms = () => {
   return (
@@ -51,18 +52,27 @@ const Terms = () => {
           background: rgba(0, 0, 0, 0.25);
         }
 
-        .section-title {
-          font-family: 'Orbitron', sans-serif;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          color: rgba(216, 184, 91, 0.98);
-          font-size: clamp(1.02rem, 1.2vw, 1.15rem);
-        }
-
         .body-text {
           color: rgba(255, 255, 255, 0.72);
           line-height: 1.85;
           font-size: clamp(0.98rem, 1.05vw, 1.05rem);
+        }
+
+        .terms-item {
+          display: flex;
+          gap: 0.75rem;
+          padding: 0.6rem 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .terms-item:first-of-type { border-top: 0; }
+
+        .terms-bullet {
+          flex-shrink: 0;
+          margin-top: 0.35rem;
+          width: 6px;
+          height: 6px;
+          background: rgba(220, 50, 50, 0.85);
+          border-radius: 50%;
         }
       `}</style>
 
@@ -78,42 +88,13 @@ const Terms = () => {
               <div className="policy-underline" />
 
               <div className="policy-panel mt-10 p-6 sm:p-10">
-                <div className="space-y-10 body-text">
-                  <div>
-                    <div className="section-title">1. Introduction</div>
-                    <p className="mt-3">
-                      These Terms and Conditions govern the use of this website and the purchase of event tickets for
-                      {" '"}Shreshta{" '"}. By accessing this website, you agree to these terms.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">2. Merchant Identification</div>
-                    <p className="mt-3">
-                      This website is operated for the {" '"}Shreshta{" '"} event. For the purpose of payment processing
-                      and regulatory compliance, the merchant of record is Ginu S Malakeel.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">3. Services</div>
-                    <p className="mt-3">
-                      We provide online registration and ticketing services for the annual college event. All
-                      transactions are processed in Indian Rupees (INR).
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">4. Payment</div>
-                    <p className="mt-3">
-                      We accept payments via Credit/Debit Cards, UPI, and Net Banking via our payment partner, Razorpay.
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="section-title">5. User Obligations</div>
-                    <p className="mt-3">You agree to provide accurate information during the registration process.</p>
-                  </div>
+                <div className="body-text space-y-1">
+                  {items.map((text, i) => (
+                    <div key={i} className="terms-item">
+                      <span className="terms-bullet" />
+                      <span>{text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

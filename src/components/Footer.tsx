@@ -142,6 +142,29 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
+          <div className="mt-10 pt-6 border-t border-white/[0.06] flex justify-center">
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+                border: "1px solid rgba(0,255,140,0.15)",
+                background: "rgba(0,255,140,0.03)",
+                padding: "0.45rem 1.1rem",
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: "clamp(0.44rem,0.7vw,0.58rem)",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.3)",
+              }}
+            >
+              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+              Designed &amp; Developed by
+              <span style={{ color: "rgba(0,255,140,0.75)", letterSpacing: "0.2em" }}>ExoHunters</span>
+              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+            </div>
+          </div>
         </div>
       </footer>
     </>
