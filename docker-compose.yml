@@ -5,5 +5,5 @@ services:
       args:
         ARG_VITE_BACKEND_URL: ${VITE_BACKEND_URL:-http://localhost:8080}
     ports:
-      - "3000:3000"
+      - "80:80"
     restart: unless-stopped
