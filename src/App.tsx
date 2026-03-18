@@ -16,6 +16,7 @@ import AdminScanner from "./pages/AdminScanner";
 const App = () => {
   return (
     <Routes>
+      //Admin route
       <Route path="/admin/scanner" element={<AdminScanner />} />
       <Route path="*" element={
         <div className="min-h-screen bg-black">
