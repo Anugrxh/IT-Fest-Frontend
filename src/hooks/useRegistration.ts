@@ -48,6 +48,15 @@ interface RazorpayOptions {
   prefill?: { name?: string; email?: string; contact?: string };
   theme?: { color?: string };
   modal?: { ondismiss?: () => void };
+  config?: {
+    display: {
+      blocks?: {
+        [key: string]: { name: string; instruments: { method: string }[] };
+      };
+      sequence?: string[];
+      preferences?: { show_default_blocks: boolean };
+    };
+  };
 }
 
 interface RazorpayInstance {
@@ -113,6 +122,34 @@ export function useRegistration() {
             contact: leadParticipant?.phone,
           },
           theme: { color: "#00af5a" },
+          config: {
+            display: {
+              blocks: {
+                upi: {
+                  name: "UPI",
+                  instruments: [
+                    { method: "upi" },
+                  ],
+                },
+                card: {
+                  name: "Cards",
+                  instruments: [
+                    { method: "card" },
+                  ],
+                },
+                wallet: {
+                  name: "Wallets",
+                  instruments: [
+                    { method: "wallet" },
+                  ],
+                },
+              },
+              sequence: ["block.upi", "block.card", "block.wallet"],
+              preferences: {
+                show_default_blocks: false,
+              },
+            },
+          },
           handler: async (response: RazorpayResponse) => {
             try {
               // Step 5: Verify payment
