@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const TARGET_DATE = new Date("2026-03-11T00:00:00+05:30").getTime();
+const TARGET_DATE = new Date("2026-03-24T00:00:00+05:30").getTime();
 
 function getTimeLeft() {
   const now = Date.now();
@@ -150,15 +150,24 @@ const Hero = () => {
           display: inline-block;
         }
       `}</style>
-      <section id="home" className="relative h-screen flex flex-col items-center justify-center   bg-[#0a0a0f]  hero-grid-bg overflow-hidden">
-        <div className="absolute inset-0" style={{
-          background: "radial-gradient(ellipse at 50% 50%, rgba(0, 255, 140, 0.04) 0%, transparent 70%)",
-        }} />
+      <section
+        id="home"
+        className="relative h-screen flex flex-col items-center justify-center   bg-[#0a0a0f]  hero-grid-bg overflow-hidden"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, rgba(0, 255, 140, 0.04) 0%, transparent 70%)",
+          }}
+        />
 
         <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 px-4 w-full max-w-screen-xl  ">
           <div className="flex items-center gap-3 mb-2 ">
             <span className="hero-diamond" />
-            <span className="hero-subtitle">SYSTEM: ONLINE // NATIONAL_LEVEL_FEST</span>
+            <span className="hero-subtitle">
+              SYSTEM: ONLINE // NATIONAL_LEVEL_FEST
+            </span>
             <span className="hero-diamond" />
           </div>
 
@@ -178,14 +187,19 @@ const Hero = () => {
 
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
             {units.map((unit, i) => (
-              <div key={unit.label} className="flex items-center gap-2 sm:gap-4 md:gap-6">
+              <div
+                key={unit.label}
+                className="flex items-center gap-2 sm:gap-4 md:gap-6"
+              >
                 <div className="flex flex-col items-center gap-1 sm:gap-2">
                   <div
                     className="flex items-center justify-center rounded-xl"
                     style={{
-                      background: "linear-gradient(145deg, rgba(0, 255, 140, 0.06), rgba(0, 255, 140, 0.01))",
+                      background:
+                        "linear-gradient(145deg, rgba(0, 255, 140, 0.06), rgba(0, 255, 140, 0.01))",
                       border: "1px solid rgba(0, 255, 140, 0.1)",
-                      boxShadow: "0 4px 20px rgba(0, 255, 140, 0.05), inset 0 1px 0 rgba(0, 255, 140, 0.08)",
+                      boxShadow:
+                        "0 4px 20px rgba(0, 255, 140, 0.05), inset 0 1px 0 rgba(0, 255, 140, 0.08)",
                       width: "clamp(50px, 14vw, 100px)",
                       height: "clamp(55px, 16vw, 110px)",
                     }}
@@ -203,15 +217,17 @@ const Hero = () => {
             ))}
           </div>
 
-          <p style={{
-            fontFamily: "'Orbitron', sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(0.7rem, 1.5vw, 1rem)",
-            letterSpacing: "0.4em",
-            color: "rgba(0, 255, 140, 0.45)",
-            marginTop: "0.5rem",
-          }}>
-            MARCH 11, 12 — 2026
+          <p
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(0.7rem, 1.5vw, 1rem)",
+              letterSpacing: "0.4em",
+              color: "rgba(0, 255, 140, 0.45)",
+              marginTop: "0.5rem",
+            }}
+          >
+            MARCH 24, 25 — 2026
           </p>
 
           <a
@@ -231,8 +247,12 @@ const Hero = () => {
               textDecoration: "none",
               transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(0, 255, 140, 0.8)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(0, 255, 140, 0.45)")}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "rgba(0, 255, 140, 0.8)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "rgba(0, 255, 140, 0.45)")
+            }
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
