@@ -158,7 +158,10 @@ const EventDetails = () => {
         .cta-btn:disabled { opacity:0.4; cursor:not-allowed; }
         .divider { height:1px; background:rgba(255,255,255,0.08); margin:1.25rem 0; }
         .badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,200,80,0.1); border:1px solid rgba(255,200,80,0.35); color:#e0b54b; padding:0.35rem 0.75rem; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; font-family:'Orbitron',sans-serif; }
-        .back-link { font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:#00ff8c; display:inline-flex; align-items:center; margin-bottom:0.75rem; }
+        .back-link { font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:#00ff8c; display:inline-flex; align-items:center; gap:0.45rem; margin-bottom:0.75rem; transition:color 0.2s ease, transform 0.2s ease; }
+        .back-link:hover { color:#00d878; }
+        .back-link-icon { width:0.9rem; height:0.9rem; transition:transform 0.2s ease; }
+        .back-link:hover .back-link-icon { transform:translateX(-2px); }
         .steps-list { display:grid; gap:0.8rem; font-size:0.85rem; color:rgba(255,255,255,0.7); counter-reset:step; }
         .steps-list li { list-style:none; display:grid; grid-template-columns:2.2rem 1fr; gap:0.75rem; align-items:start; }
         .steps-list li::before { counter-increment:step; content:counter(step,decimal-leading-zero)"."; font-family:'Orbitron',sans-serif; letter-spacing:0.2em; color:rgba(230,185,80,0.8); }
@@ -206,7 +209,12 @@ const EventDetails = () => {
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
               <div className="max-w-3xl">
-                <Link to="/" className="back-link">Back to events</Link>
+                <Link to="/" className="back-link" aria-label="Back to events">
+                  <svg className="back-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                  <span>Back to events</span>
+                </Link>
                 <h1 className="hero-title">{event.name}</h1>
                 <div className="info-row mt-4">
                   <span className="info-item">
