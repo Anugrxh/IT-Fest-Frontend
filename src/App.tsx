@@ -11,32 +11,27 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
 import Faq from "./pages/Faq";
+import AdminScanner from "./pages/AdminScanner";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <About />
-              <Events />
-              <Sponsors />
-              <Schedule />
-            </>
-          }
-        />
-        <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/refund" element={<Refund />} />
-        <Route path="/faq" element={<Faq />} />
-      </Routes>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/admin/scanner" element={<AdminScanner />} />
+      <Route path="*" element={
+        <div className="min-h-screen bg-black">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<><Hero /><About /><Events /><Sponsors /><Schedule /></>} />
+            <Route path="/events/:id" element={<EventDetails />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/refund" element={<Refund />} />
+            <Route path="/faq" element={<Faq />} />
+          </Routes>
+          <Footer />
+        </div>
+      } />
+    </Routes>
   );
 };
 

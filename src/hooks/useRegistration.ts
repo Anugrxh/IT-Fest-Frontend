@@ -28,6 +28,7 @@ export interface ConfirmationData {
   paymentStatus: string;
   isTeamEvent: boolean;
   teamName?: string;
+  qrCode: string;
 }
 
 declare global {
@@ -115,7 +116,7 @@ export function useRegistration() {
           handler: async (response: RazorpayResponse) => {
             try {
               // Step 5: Verify payment
-              await axios.post(`${API_BASE}/api/payments/verify`, {
+              const { data: verifyData } = await axios.post(`${API_BASE}/api/payments/verify`, {
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpaySignature: response.razorpay_signature,
@@ -131,6 +132,7 @@ export function useRegistration() {
                 paymentStatus: fullReg.payment?.status ?? "confirmed",
                 isTeamEvent: fullReg.isTeamEvent,
                 teamName: fullReg.teamName,
+                qrCode: verifyData.qrCode ?? "",
               });
               resolve();
             } catch (err) {
