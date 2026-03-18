@@ -97,6 +97,8 @@ const EventDetails = () => {
     e.preventDefault();
     if (!event) return;
     if (event.is_team) {
+      const totalMembers = 1 + members.length; // 1 leader + additional members
+      const totalAmount = event.price * totalMembers;
       await register({
         eventId: String(event.id),
         eventName: event.name,
@@ -106,7 +108,7 @@ const EventDetails = () => {
           { ...leader, isLeader: true },
           ...members.map((m) => ({ ...m, isLeader: false })),
         ],
-      }, event.price);
+      }, totalAmount);
     } else {
       await register({
         eventId: String(event.id),
