@@ -87,7 +87,7 @@ const Footer = () => {
               <div className="flex flex-col gap-2">
                 <a
                   className="footer-link"
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/zeitgeist.kuc"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -95,7 +95,7 @@ const Footer = () => {
                 </a>
                 <a
                   className="footer-link"
-                  href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
+                  href="https://chat.whatsapp.com/F76BqAXN0V522bSAiYr2tX"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -115,14 +115,15 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               <div className="footer-title">Contact</div>
               <div className="flex flex-col gap-2">
-                <a className="footer-link" href="tel:+919188851878">
-                  Mob: +91 9188851878
+                <a className="footer-link" href="tel:+919188851878 ">
+                  Mob: 
+                  <br/>
+                  Naveen - +91 91888 51878 
+                  <br/>
+                  Krishnendh - +91 82817 15882
                 </a>
-                <a
-                  className="footer-link"
-                  href="mailto:zeitgiest2026@gmail.com"
-                >
-                  Email: zeitgiest2026@gmail.com
+                <a className="footer-link" href="mailto:zeitgeist2026@gmail.com">
+                  Email: zeitgeist2026@gmail.com
                 </a>
               </div>
             </div>
