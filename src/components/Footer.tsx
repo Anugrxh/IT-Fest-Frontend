@@ -95,7 +95,7 @@ const Footer = () => {
                 </a>
                 <a
                   className="footer-link"
-                  href="https://www.whatsapp.com"
+                  href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -103,7 +103,7 @@ const Footer = () => {
                 </a>
                 <a
                   className="footer-link"
-                  href="https://www.whatsapp.com"
+                  href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -115,11 +115,14 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               <div className="footer-title">Contact</div>
               <div className="flex flex-col gap-2">
-                <a className="footer-link" href="tel:+910000000000">
-                  Mob: +91 00000 00000
+                <a className="footer-link" href="tel:+919188851878">
+                  Mob: +91 9188851878
                 </a>
-                <a className="footer-link" href="mailto:info@zeitgeist.example">
-                  Email: info@zeitgeist.example
+                <a
+                  className="footer-link"
+                  href="mailto:zeitgiest2026@gmail.com"
+                >
+                  Email: zeitgiest2026@gmail.com
                 </a>
               </div>
             </div>
@@ -159,10 +162,25 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.3)",
               }}
             >
-              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+              <span
+                style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}
+              >
+                ◆
+              </span>
               Designed &amp; Developed by
-              <span style={{ color: "rgba(0,255,140,0.75)", letterSpacing: "0.2em" }}>ExoHunters</span>
-              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+              <span
+                style={{
+                  color: "rgba(0,255,140,0.75)",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                ExoHunters
+              </span>
+              <span
+                style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}
+              >
+                ◆
+              </span>
             </div>
           </div>
         </div>
