@@ -17,6 +17,11 @@ interface ProgramItem {
   venue?: string;
   prize_pool: number;
   price: number;
+  first_prize?: number;
+  second_prize?: number;
+  registration_fee_note?: string;
+  coordinator_name?: string;
+  coordinator_number?: string;
   is_team: boolean;
   team_size: number | null;
   main_image_url: string;
@@ -34,6 +39,7 @@ interface MemberFields {
 }
 
 const EMPTY_MEMBER = (): MemberFields => ({ name: "", email: "", phone: "", college: "" });
+const formatCurrency = (amount: number) => new Intl.NumberFormat("en-IN").format(amount);
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -78,12 +84,19 @@ const EventDetails = () => {
   const eventDirectives = (event.event_directives?.length ? event.event_directives : defaultDirectives)
     .map((d) => d.replace("{team}", teamLabel));
 
-  const capacityTotal = event.capacity_total ?? 0;
-  const capacityFilled = event.capacity_filled ?? 0;
-  const capacityLabel = capacityTotal ? `${capacityFilled} / ${capacityTotal} Filled` : "Capacity TBA";
   const eventDate = event.event_date ?? "Date TBA";
   const eventTime = event.event_time ?? "Time TBA";
   const eventVenue = event.venue ?? "Venue TBA";
+  const firstPrize = event.first_prize ?? event.prize_pool;
+  const secondPrize = event.second_prize ?? 0;
+  const hasSecondPrize = secondPrize > 0;
+  const registrationFeeLabel = event.registration_fee_note
+    ? `₹${event.registration_fee_note}`
+    : event.is_team
+      ? `₹${event.price} per head`
+      : `₹${event.price}`;
+  const coordinatorName = event.coordinator_name?.trim() || "________________";
+  const coordinatorNumber = event.coordinator_number?.trim() || "________________";
 
   function updateLeader(field: keyof MemberFields, val: string) {
     setLeader((p) => ({ ...p, [field]: val }));
@@ -268,33 +281,34 @@ const EventDetails = () => {
                 <div className="panel">
                   <div className="panel-title">Prize Bounty</div>
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
-                    <div><div className="badge">Grand Pool</div><div className="text-lg text-white mt-2">₹{event.prize_pool}/-</div></div>
-                    <div><div className="badge">Registration</div><div className="text-lg text-white mt-2">₹{event.price}/-</div></div>
+                    <div><div className="badge">First Prize</div><div className="text-lg text-white mt-2">₹{formatCurrency(firstPrize)}/-</div></div>
+                    {hasSecondPrize && <div><div className="badge">Second Prize</div><div className="text-lg text-white mt-2">₹{formatCurrency(secondPrize)}/-</div></div>}
+                    <div><div className="badge">Grand Pool</div><div className="text-lg text-white mt-2">₹{formatCurrency(event.prize_pool)}/-</div></div>
+                    <div><div className="badge">Registration</div><div className="text-lg text-white mt-2">{registrationFeeLabel}</div></div>
                     <div><div className="badge">Team Size</div><div className="text-lg text-white mt-2">{teamLabel}</div></div>
                   </div>
                 </div>
                 <div className="panel">
-                  <div className="panel-title">Quick Info</div>
+                  <div className="panel-title">Contact</div>
                   <div className="flex flex-col gap-3 text-sm text-white/70">
-                    <div>Category: {event.category}</div>
-                    <div>Format: {teamLabel}</div>
-                    <div>Prize Pool: ₹{event.prize_pool}/-</div>
-                    <div>Registration Fee: ₹{event.price}/-</div>
+                    <div>Coordinator Name: {coordinatorName}</div>
+                    <div>Coordinator Number: {coordinatorNumber}</div>
                   </div>
                 </div>
               </div>
 
               {/* Registration card */}
               <div className="status-card lg:col-span-2">
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <span className="status-label">Capacity Status</span>
                   <span className="status-label">{capacityLabel}</span>
-                </div>
+                </div> */}
                 <div className="status-bar" />
                 <div className="flex flex-col items-center gap-3 text-center">
                   <div className="status-emblem">₹</div>
-                  <span className="status-label">Tribute Required</span>
-                  <div className="price-value">₹{event.price}/-</div>
+                  <span className="status-label">Entry Fee</span>
+                  <div className="price-value">{event.is_team ? `₹${event.price}/head` : `₹${event.price}/-`}</div>
+                  {event.registration_fee_note && <div className="text-xs text-white/60">{event.registration_fee_note}</div>}
                 </div>
                 <div className="divider" />
                 <button className="cta-btn" onClick={() => setShowForm((v) => !v)}>
