@@ -38,7 +38,7 @@ interface MemberFields {
   college: string;
 }
 
-const EMPTY_MEMBER = (): MemberFields => ({ name: "", email: "", phone: "", college: "", food: "veg" });
+const EMPTY_MEMBER = (): MemberFields => ({ name: "", email: "", phone: "", college: "" });
 const formatCurrency = (amount: number) => new Intl.NumberFormat("en-IN").format(amount);
 
 const EventDetails = () => {
@@ -84,9 +84,6 @@ const EventDetails = () => {
   const eventDirectives = (event.event_directives?.length ? event.event_directives : defaultDirectives)
     .map((d) => d.replace("{team}", teamLabel));
 
-  const capacityTotal = event.capacity_total ?? 0;
-  const capacityFilled = event.capacity_filled ?? 0;
-  const capacityLabel = capacityTotal ? `${capacityFilled} / ${capacityTotal} Filled` : "Capacity TBA";
   const eventDate = event.event_date ?? "Date TBA";
   const eventTime = event.event_time ?? "Time TBA";
   const eventVenue = event.venue ?? "Venue TBA";
