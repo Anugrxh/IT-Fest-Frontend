@@ -104,7 +104,6 @@ const Footer = () => {
                 <a
                   className="footer-link"
                   href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
-                  href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
