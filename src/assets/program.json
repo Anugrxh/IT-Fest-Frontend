@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "name": "Hackathon",
+    "name": "Hackathon  (24 hours)",
     "category": "Coding",
     "description": "Collaborative coding marathon to build innovative solutions.",
     "event_date": "Mar 24, 2026",
-    "event_time": "11:00 AM - 5:00 PM",
+    "event_time": "11:00 AM - 11 : 00 PM (24 hours Hackathon)",
     "venue": "2nd FYIMP, 2nd MSc",
     "prize_pool": 30000,
     "first_prize": 20000,
