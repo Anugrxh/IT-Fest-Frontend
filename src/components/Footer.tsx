@@ -104,6 +104,7 @@ const Footer = () => {
                 <a
                   className="footer-link"
                   href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
+                  href="https://whatsapp.com/channel/0029VbCUapz9WtByiXiPhv2B"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -163,10 +164,25 @@ const Footer = () => {
                 color: "rgba(255,255,255,0.3)",
               }}
             >
-              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+              <span
+                style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}
+              >
+                ◆
+              </span>
               Designed &amp; Developed by
-              <span style={{ color: "rgba(0,255,140,0.75)", letterSpacing: "0.2em" }}>ExoHunters</span>
-              <span style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}>◆</span>
+              <span
+                style={{
+                  color: "rgba(0,255,140,0.75)",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                ExoHunters
+              </span>
+              <span
+                style={{ color: "rgba(0,255,140,0.4)", fontSize: "0.55rem" }}
+              >
+                ◆
+              </span>
             </div>
           </div>
         </div>
