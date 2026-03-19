@@ -11,7 +11,7 @@
     "price": 400,
     "is_team": true,
     "team_size": 4,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/hackathon.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -35,7 +35,7 @@
     "price": 200,
     "is_team": true,
     "team_size": 4,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/tressure_hunt.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -59,7 +59,7 @@
     "price": 200,
     "is_team": true,
     "team_size": 4,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/mini_militia.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -83,7 +83,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/trouble_shooting.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -107,7 +107,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/typing.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -131,7 +131,7 @@
     "price": 100,
     "is_team": true,
     "team_size": 2,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/it_quiz.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -155,7 +155,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/desinging.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -179,7 +179,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/mehandi.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -203,7 +203,7 @@
     "price": 200,
     "is_team": true,
     "team_size": 4,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/pubg.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -227,7 +227,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/e_football.jpeg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -251,7 +251,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/chess.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -275,7 +275,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/photography.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -299,7 +299,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/videography.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -323,7 +323,7 @@
     "price": 100,
     "is_team": true,
     "team_size": 2,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/debate.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
@@ -347,7 +347,7 @@
     "price": 50,
     "is_team": false,
     "team_size": null,
-    "main_image_url": "",
+    "main_image_url": "/assets/events/blind_coding.jpg",
     "gallery_images": [],
     "event_directives": [
       "Participation format: {team}.",
