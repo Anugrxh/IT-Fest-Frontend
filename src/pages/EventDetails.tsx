@@ -31,10 +31,9 @@ interface MemberFields {
   email: string;
   phone: string;
   college: string;
-  food: "veg" | "non-veg";
 }
 
-const EMPTY_MEMBER = (): MemberFields => ({ name: "", email: "", phone: "", college: "", food: "veg" });
+const EMPTY_MEMBER = (): MemberFields => ({ name: "", email: "", phone: "", college: "" });
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -105,8 +104,8 @@ const EventDetails = () => {
         isTeamEvent: true,
         teamName,
         participants: [
-          { ...leader, isLeader: true },
-          ...members.map((m) => ({ ...m, isLeader: false })),
+          { ...leader, food: "veg" as const, isLeader: true },
+          ...members.map((m) => ({ ...m, food: "veg" as const, isLeader: false })),
         ],
       }, totalAmount);
     } else {
@@ -114,7 +113,7 @@ const EventDetails = () => {
         eventId: String(event.id),
         eventName: event.name,
         isTeamEvent: false,
-        participant: { ...leader },
+        participant: { ...leader, food: "veg" as const },
       }, event.price);
     }
   }
@@ -330,14 +329,6 @@ const EventDetails = () => {
                           <div className="reg-label">College</div>
                           <input className="reg-input" type="text" placeholder="Enter your college name" value={leader.college} onChange={(e) => updateLeader("college", e.target.value)} required />
                         </div>
-                        <div>
-                          <div className="reg-label">Food Preference</div>
-                          <div className="flex gap-3">
-                            <button type="button" className={`food-btn ${leader.food === "veg" ? "active" : ""}`} onClick={() => updateLeader("food", "veg")}>Veg</button>
-                            <button type="button" className={`food-btn ${leader.food === "non-veg" ? "active" : ""}`} onClick={() => updateLeader("food", "non-veg")}>Non Veg</button>
-                          </div>
-                          <p style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.35)", marginTop:"0.4rem", letterSpacing:"0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
-                        </div>
                         <div className="tc-checkbox-row">
                           <input type="checkbox" id="tc-solo" checked={tcAccepted} onChange={(e) => setTcAccepted(e.target.checked)} />
                           <label htmlFor="tc-solo">I agree to the <button type="button" className="tc-link" onClick={() => setTcOpen(true)}>Terms and Conditions</button></label>
@@ -385,15 +376,6 @@ const EventDetails = () => {
                           <div className="reg-label">College</div>
                           <input className="reg-input" type="text" placeholder="Enter college name" value={leader.college} onChange={(e) => updateLeader("college", e.target.value)} required />
                         </div>
-                        <div>
-                          <div className="reg-label">Food Preference</div>
-                          <div className="flex gap-3">
-                            <button type="button" className={`food-btn ${leader.food === "veg" ? "active" : ""}`} onClick={() => updateLeader("food", "veg")}>Veg</button>
-                            <button type="button" className={`food-btn ${leader.food === "non-veg" ? "active" : ""}`} onClick={() => updateLeader("food", "non-veg")}>Non Veg</button>
-                          </div>
-                          <p style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.35)", marginTop:"0.4rem", letterSpacing:"0.05em" }}>* Food is included in the registration fee. No extra charges.</p>
-                        </div>
-
                         {/* Additional team members */}
                         {members.map((member, idx) => (
                           <div key={idx}>
@@ -421,13 +403,6 @@ const EventDetails = () => {
                               <div>
                                 <div className="reg-label">College</div>
                                 <input className="reg-input" type="text" placeholder="Enter college name" value={member.college} onChange={(e) => updateMember(idx,"college",e.target.value)} required />
-                              </div>
-                              <div>
-                                <div className="reg-label">Food Preference</div>
-                                <div className="flex gap-3">
-                                  <button type="button" className={`food-btn ${member.food === "veg" ? "active" : ""}`} onClick={() => updateMember(idx,"food","veg")}>Veg</button>
-                                  <button type="button" className={`food-btn ${member.food === "non-veg" ? "active" : ""}`} onClick={() => updateMember(idx,"food","non-veg")}>Non Veg</button>
-                                </div>
                               </div>
                             </div>
                           </div>
