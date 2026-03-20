@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const CASHFREE_ENV = import.meta.env.VITE_CASHFREE_ENV || "sandbox";
 
 export interface Participant {
   name: string;
@@ -33,48 +34,26 @@ export interface ConfirmationData {
 
 declare global {
   interface Window {
-    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
+    Cashfree: new (config: { mode: string }) => CashfreeInstance;
   }
 }
 
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  order_id: string;
-  name: string;
-  description: string;
-  handler: (response: RazorpayResponse) => void;
-  prefill?: { name?: string; email?: string; contact?: string };
-  theme?: { color?: string };
-  modal?: { ondismiss?: () => void };
-  config?: {
-    display: {
-      blocks?: {
-        [key: string]: { name: string; instruments: { method: string }[] };
-      };
-      sequence?: string[];
-      preferences?: { show_default_blocks: boolean };
-    };
-  };
+interface CashfreeInstance {
+  checkout: (options: {
+    paymentSessionId: string;
+    redirectTarget: string;
+  }) => Promise<{
+    error?: { message: string };
+    paymentDetails?: object;
+  }>;
 }
 
-interface RazorpayInstance {
-  open: () => void;
-}
-
-interface RazorpayResponse {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
-}
-
-function loadRazorpayScript(): Promise<boolean> {
+function loadCashfreeScript(): Promise<boolean> {
   return new Promise((resolve) => {
-    if (document.getElementById("razorpay-script")) return resolve(true);
+    if (document.getElementById("cashfree-script")) return resolve(true);
     const script = document.createElement("script");
-    script.id = "razorpay-script";
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.id = "cashfree-script";
+    script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
     script.onload = () => resolve(true);
     script.onerror = () => resolve(false);
     document.body.appendChild(script);
@@ -92,98 +71,88 @@ export function useRegistration() {
 
     try {
       // Step 1: Create registration
-      const { data: regData } = await axios.post(`${API_BASE}/api/registrations`, payload);
+      const { data: regData } = await axios.post(
+        `${API_BASE}/api/registrations`,
+        payload
+      );
       const registrationId: string = regData.registrationId;
 
-      // Step 2: Create Razorpay order
-      const { data: orderData } = await axios.post(`${API_BASE}/api/payments/order`, {
-        registrationId,
-        amount: priceInRupees * 100, // convert to paise
-      });
+      // Step 2: Create Cashfree order (amount in rupees directly)
+      const { data: orderData } = await axios.post(
+        `${API_BASE}/api/payments/order`,
+        {
+          registrationId,
+          amount: priceInRupees, // NOT multiplied by 100, Cashfree uses rupees
+        }
+      );
 
-      // Step 3: Load Razorpay script
-      const loaded = await loadRazorpayScript();
-      if (!loaded) throw new Error("Failed to load Razorpay. Check your connection.");
+      // Step 3: Load Cashfree script
+      const loaded = await loadCashfreeScript();
+      if (!loaded)
+        throw new Error("Failed to load payment SDK. Check your connection.");
 
-      // Step 4: Open Razorpay checkout
-      const leadParticipant = payload.participant ?? payload.participants?.[0];
-
+      // Step 4: Open Cashfree checkout popup
       await new Promise<void>((resolve, reject) => {
-        const rzp = new window.Razorpay({
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: orderData.currency,
-          order_id: orderData.orderId,
-          name: "IT Fest",
-          description: payload.eventName,
-          prefill: {
-            name: leadParticipant?.name,
-            email: leadParticipant?.email,
-            contact: leadParticipant?.phone,
-          },
-          theme: { color: "#00af5a" },
-          config: {
-            display: {
-              blocks: {
-                upi: {
-                  name: "UPI",
-                  instruments: [
-                    { method: "upi" },
-                  ],
-                },
-                card: {
-                  name: "Cards",
-                  instruments: [
-                    { method: "card" },
-                  ],
-                },
-                wallet: {
-                  name: "Wallets",
-                  instruments: [
-                    { method: "wallet" },
-                  ],
-                },
-              },
-              sequence: ["block.upi", "block.card", "block.wallet"],
-              preferences: {
-                show_default_blocks: false,
-              },
-            },
-          },
-          handler: async (response: RazorpayResponse) => {
-            try {
-              // Step 5: Verify payment
-              const { data: verifyData } = await axios.post(`${API_BASE}/api/payments/verify`, {
-                razorpayOrderId: response.razorpay_order_id,
-                razorpayPaymentId: response.razorpay_payment_id,
-                razorpaySignature: response.razorpay_signature,
-                registrationId,
-              });
-
-              // Step 6: Fetch full registration for confirmation
-              const { data: fullReg } = await axios.get(`${API_BASE}/api/registrations/${registrationId}`);
-              setConfirmation({
-                registrationId,
-                eventName: fullReg.eventName,
-                participants: fullReg.participants,
-                paymentStatus: fullReg.payment?.status ?? "confirmed",
-                isTeamEvent: fullReg.isTeamEvent,
-                teamName: fullReg.teamName,
-                qrCode: verifyData.qrCode ?? "",
-              });
-              resolve();
-            } catch (err) {
-              reject(new Error("Payment verification failed. Contact support."));
-            }
-          },
-          modal: {
-            ondismiss: () => reject(new Error("Payment cancelled.")),
-          },
+        const cashfree = new window.Cashfree({
+          mode: CASHFREE_ENV, // "sandbox" or "production"
         });
-        rzp.open();
+
+        cashfree
+          .checkout({
+            paymentSessionId: orderData.orderToken,
+            redirectTarget: "_modal", // opens as popup, stays on your site
+          })
+          .then(async (result) => {
+            // Payment failed or cancelled
+            if (result.error) {
+              reject(
+                new Error(result.error.message || "Payment failed or cancelled.")
+              );
+              return;
+            }
+
+            // Payment completed successfully
+            if (result.paymentDetails) {
+              try {
+                // Step 5: Verify payment on backend
+                const { data: verifyData } = await axios.post(
+                  `${API_BASE}/api/payments/verify`,
+                  {
+                    orderId: orderData.orderId,
+                    registrationId,
+                  }
+                );
+
+                // Step 6: Fetch full registration for confirmation screen
+                const { data: fullReg } = await axios.get(
+                  `${API_BASE}/api/registrations/${registrationId}`
+                );
+
+                setConfirmation({
+                  registrationId,
+                  eventName: fullReg.eventName,
+                  participants: fullReg.participants,
+                  paymentStatus: fullReg.payment?.status ?? "confirmed",
+                  isTeamEvent: fullReg.isTeamEvent,
+                  teamName: fullReg.teamName,
+                  qrCode: verifyData.qrCode ?? "",
+                });
+
+                resolve();
+              } catch {
+                reject(
+                  new Error("Payment verification failed. Contact support.")
+                );
+              }
+            }
+          })
+          .catch(() => {
+            reject(new Error("Payment cancelled."));
+          });
       });
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Something went wrong.";
+      const msg =
+        err instanceof Error ? err.message : "Something went wrong.";
       setError(msg);
     } finally {
       setLoading(false);
