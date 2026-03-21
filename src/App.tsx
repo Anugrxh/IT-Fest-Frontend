@@ -33,6 +33,16 @@ const App = () => {
                     <Hero />
                     <About />
                     <Events />
+                    <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+                      <div className="max-w-screen-xl mx-auto">
+                        <img
+                          src="/assets/posters/banner.png"
+                          alt="IT Fest banner poster"
+                          className="w-full h-auto rounded-lg"
+                          loading="lazy"
+                        />
+                      </div>
+                    </section>
                     <Schedule />
                   </>
                 }
