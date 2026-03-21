@@ -111,7 +111,7 @@ function exportCSV(registrations:Registration[]) {
   const rows=[['ID','Event','Team','Type','Status','Payment','Checked In','Date','Participants']];
   for(const r of registrations){
     rows.push([r.id,r.eventName,r.teamName??'',r.isTeamEvent?'Team':'Solo',r.status,
-      r.payment?`₹${r.payment.amount/100}`:'-',r.checkedIn?'Yes':'No',fmt(r.createdAt),
+      r.payment?`₹${r.payment.amount}`:'-',r.checkedIn?'Yes':'No',fmt(r.createdAt),
       r.participants.map(p=>p.name).join('; ')]);
   }
   const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
@@ -171,7 +171,7 @@ function StatsBar({ stats }:{ stats:Stats }) {
     { label:'Confirmed',  value:stats.confirmed },
     { label:'Pending',    value:stats.pending },
     { label:'Checked In', value:stats.checkedIn },
-    { label:'Revenue',    value:`₹${(stats.revenue/100).toLocaleString('en-IN')}` },
+    { label:'Revenue',    value:`₹${(stats.revenue).toLocaleString('en-IN')}` },
   ];
   return (
     <div style={{ display:'flex', flexWrap:'wrap', gap:10, marginBottom:24 }}>
@@ -277,7 +277,7 @@ function RegistrationsTable({ registrations, isSuperAdmin, onDelete, onCheckin }
                   </td>
                   <td style={{ ...tdStyle, fontFamily:T.font, fontSize:9, letterSpacing:'0.1em', color:T.textMuted }}>{r.isTeamEvent?'TEAM':'SOLO'}</td>
                   {isSuperAdmin && <td style={tdStyle}><StatusBadge status={r.status}/></td>}
-                  {isSuperAdmin && <td style={{ ...tdStyle, color:T.green, fontFamily:T.font, fontSize:11 }}>{r.payment?`₹${r.payment.amount/100}`:'-'}</td>}
+                  {isSuperAdmin && <td style={{ ...tdStyle, color:T.green, fontFamily:T.font, fontSize:11 }}>{r.payment?`₹${r.payment.amount}`:'-'}</td>}
                   <td style={tdStyle}><GreenBadge on={r.checkedIn} label="CHECKED IN" offLabel="NOT YET"/></td>
                   <td style={{ ...tdStyle, fontSize:11, color:T.textMuted }}>{fmt(r.createdAt)}</td>
                   <td style={tdStyle} onClick={e=>e.stopPropagation()}>
