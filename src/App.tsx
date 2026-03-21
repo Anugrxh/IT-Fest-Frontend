@@ -10,7 +10,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
 import Faq from "./pages/Faq";
-import AdminScanner from "./pages/AdminScanner";
+import AdminDashboard from "./pages/AdminDashboard";
 import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
@@ -18,8 +18,8 @@ const App = () => {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Admin route */}
-        <Route path="/admin/scanner" element={<AdminScanner />} />
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route
           path="*"
           element={
