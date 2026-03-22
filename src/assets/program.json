@@ -23,7 +23,8 @@
       "Problem statement is revealed only at the start.",
       "Libraries are allowed; pre-built projects are not.",
       "Judging is based on innovation, functionality, and pitch.",
-      "Submit a working demo with a short final pitch."
+      "Submit a working demo with a short final pitch.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 8
@@ -52,7 +53,8 @@
       "All clues are logic-based.",
       "Check in at every clue point; no skipping.",
       "No communication with other teams during the event.",
-      "First team to reach the final location wins."
+      "First team to reach the final location wins.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 9
@@ -81,7 +83,8 @@
       "All matches are solo deathmatch with a 15-minute limit per round.",
       "Top 3 players advance to the final; ranking uses kills and survival tie-break.",
       "No hacked/mod apps, cheating, or abusive language; violations mean disqualification.",
-      "No restarts for personal technical issues; organizer decision is final."
+      "No restarts for personal technical issues; organizer decision is final.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 0
@@ -110,7 +113,8 @@
       "Timer starts at seat-in and stops when you declare completion.",
       "Partial fixes earn partial marks; scoring favors accuracy and speed.",
       "Only C/C++ challenges are allowed in all rounds.",
-      "No phones or external help; cheating leads to disqualification."
+      "No phones or external help; cheating leads to disqualification.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 7
@@ -139,7 +143,8 @@
       "No macros, auto-typing scripts, or platform tampering.",
       "Any cheating attempt results in instant disqualification.",
       "If WPM ties, higher overall accuracy wins.",
-      "Platform results and coordinator decisions are final."
+      "Platform results and coordinator decisions are final.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 5
@@ -168,7 +173,8 @@
       "Hand-raising is strictly enforced for answering.",
       "Stage spotters make the final call on fastest hand.",
       "Audience shout-outs void the question immediately.",
-      "Quizmaster decisions are final in all disputes."
+      "Quizmaster decisions are final in all disputes.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 10
@@ -197,7 +203,8 @@
       "Design must be original and non-plagiarized.",
       "Reference images are allowed, but final logo must be unique.",
       "Submit in PNG or JPEG format.",
-      "Recommended minimum size is 1000 x 1000 pixels on the given theme."
+      "Recommended minimum size is 1000 x 1000 pixels on the given theme.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 4
@@ -226,7 +233,8 @@
       "Total time allowed is 1 hour.",
       "No phone references or phone usage during the event.",
       "Official mehandi cone will be provided.",
-      "Participants must complete within the given time limit."
+      "Participants must complete within the given time limit.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 3
@@ -284,7 +292,8 @@
       "Team form is random; extra time and penalties are enabled.",
       "If match is interrupted, decision follows in-game result screen.",
       "No custom control remapping is allowed.",
-      "Unsportsmanlike conduct causes instant disqualification; organizer call is final."
+      "Unsportsmanlike conduct causes instant disqualification; organizer call is final.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 8
@@ -313,7 +322,8 @@
       "Each player gets 15 minutes on the chess clock.",
       "Standard FIDE rules apply; second illegal move means loss.",
       "Draws use tiebreaks: blitz, then Armageddon if needed.",
-      "No phones/external help; organizer decisions are final."
+      "No phones/external help; organizer decisions are final.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 7
@@ -342,7 +352,8 @@
       "Submit exactly one photo.",
       "Only basic editing is allowed.",
       "No AI-generated or pre-taken images are permitted.",
-      "Judging is based on composition, creativity, and theme relevance."
+      "Judging is based on composition, creativity, and theme relevance.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 6
@@ -371,7 +382,8 @@
       "All footage must be shot during the event window.",
       "Final video duration must be under 3 minutes.",
       "Submit by the announced end-of-day deadline.",
-      "Judging is based on storytelling, editing, and theme relevance."
+      "Judging is based on storytelling, editing, and theme relevance.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 5
@@ -400,7 +412,8 @@
       "Topic is given at venue with 15 minutes preparation time.",
       "Each team gets 10 minutes to present; warning bell at 9 minutes.",
       "No phones, internet, or external aid during competition.",
-      "Judging is based on valid points and presentation; no unparliamentary language."
+      "Judging is based on valid points and presentation; no unparliamentary language.",
+      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 9
@@ -429,7 +442,8 @@
       "Monitor must remain off or fully covered while coding.",
       "No internet, AI tools, notes, or pre-written snippets.",
       "After timer ends, submit directly to HackerRank without edits.",
-      "Only one compile/run attempt is allowed."
+      "Only one compile/run attempt is allowed.",
+      "⚠️ Minimum 10 participants required. This event will be cancelled if the requirement is not met ⚠️ "
     ],
     "capacity_total": 12,
     "capacity_filled": 0
