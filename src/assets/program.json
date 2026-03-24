@@ -1,35 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Hackathon  (24 hours)",
-    "category": "Coding",
-    "description": "Collaborative coding marathon to build innovative solutions.",
-    "event_date": "Mar 24-25, 2026",
-    "event_time": "11:00 AM - 11:00 AM (24 Hrs)",
-    "venue": "2nd FYIMP, 2nd MSc",
-    "prize_pool": 30000,
-    "first_prize": 20000,
-    "second_prize": 10000,
-    "price": 100,
-    "registration_fee_note": "100 per head (400 for 4-member team)",
-    "coordinator_name": "Shaza Jabbar | Aakamsh ",
-    "coordinator_number": "9061582814  | 9847584237",
-    "is_team": true,
-    "team_size": 4,
-    "main_image_url": "/assets/events/hackathon.jpg",
-    "gallery_images": [],
-    "event_directives": [
-      "Teams of 2-4; all members must be registered.",
-      "Problem statement is revealed only at the start.",
-      "Libraries are allowed; pre-built projects are not.",
-      "Judging is based on innovation, functionality, and pitch.",
-      "Submit a working demo with a short final pitch.",
-      "⚠️ Minimum 5 teams required. This event will be cancelled if the requirement is not met ⚠️ "
-    ],
-    "capacity_total": 12,
-    "capacity_filled": 8
-  },
-  {
     "id": 2,
     "name": "Treasure Hunt",
     "category": "Others",
