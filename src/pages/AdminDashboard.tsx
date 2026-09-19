@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Html5Qrcode } from 'html5-qrcode';
 
 const API = import.meta.env.VITE_API_BASE_URL;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+const SUPER_ADMIN_PASSWORD = import.meta.env.VITE_SUPER_ADMIN_PASSWORD;
 
 // ── Theme tokens ───────────────────────────────────────────────────────────────
 const T = {
@@ -126,9 +128,11 @@ function LoginScreen({ onLogin }:{ onLogin:(pw:string,role:string)=>void }) {
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState('');
 
-  async function handleSubmit(e:React.FormEvent){ e.preventDefault(); setLoading(true); setError('');
-    try{ const res=await axios.get(`${API}/api/admin/role`,{headers:hdrs(pw)}); onLogin(pw,res.data.role); }
-    catch{ setError('Invalid password'); } finally{ setLoading(false); }
+  function handleSubmit(e:React.FormEvent){ e.preventDefault(); setLoading(true); setError('');
+    if(SUPER_ADMIN_PASSWORD && pw===SUPER_ADMIN_PASSWORD) onLogin(pw,'superadmin');
+    else if(ADMIN_PASSWORD && pw===ADMIN_PASSWORD) onLogin(pw,'admin');
+    else setError('Invalid password');
+    setLoading(false);
   }
 
   return (
